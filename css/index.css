@@ -1,0 +1,21 @@
+#listado {
+    position: absolute;
+    width: 600px;
+    margin: 0;
+    padding-top: 50px;;
+    top: 80px;
+    left:330px;
+    padding-bottom: 50px;
+}
+
+#elemento {
+	background: orange;
+}
+
+#publicar {
+	position: absolute;
+	right: 10px;
+	background: orange;
+	text-decoration: none;
+
+}
