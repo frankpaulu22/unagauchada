@@ -12,7 +12,7 @@
 
     echo $usid;
 
-	$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', 'imagen', 'extension')";
+	$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$imagen', '$extension')";
     $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
 
 	$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
