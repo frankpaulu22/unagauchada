@@ -11,10 +11,9 @@
 	$consulcredi = "SELECT * FROM usuarios WHERE id_usuario=$usrid";
 	$resulcredi = mysqli_query($conexion, $consulcredi);	
 	$totcredi = mysqli_fetch_assoc($resulcredi);
-	echo 'Usted tiene: ', $totcredi['creditos'],' creditos';
 ?>
 	<form action='/php/enviarcompra.php?usid=<?php echo $usrid ?>' method='POST' class="creditos">
-		<h2>Complete los datos</h2>
+		<h2>Creditos: <?php echo $totcredi['creditos']; ?> </h2>
 		<input type='text' name='numtarjeta' placeholder='Numero de tarjeta*' required>
 		<input type='text' name='vencimiento' placeholder='Fecha de vencimiento*' required>
 		<input type='text' name='codigo' placeholder='Codigo de seguridad*' required>
