@@ -6,11 +6,12 @@
     <link rel="icon" type="image/png" href="/img/logo.png" />
 </head>
 <header>
-    <IMG class="logo" SRC="/img/logo.png">
+    <IMG class="banner" SRC="/img/ban1.jpg">
+    <a href="/index.php"><IMG class="logo" SRC="/img/logo.png"></a>
     <input type="checkbox" id="btn-menu">
     <label for="btn-menu" class="icon-th-list"></label>
     <nav class="menu">
-        <ul>
+        <ul class= "accesos">
             <?php
                 include('usuarios/claseuser.php');
                 include('conexion.php');

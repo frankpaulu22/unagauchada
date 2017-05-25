@@ -1,1 +1,3 @@
-perfil
+<?php
+	include("../menu.php");
+?>

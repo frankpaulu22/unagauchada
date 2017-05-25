@@ -9,7 +9,7 @@
 ?>
                     <script>
                         alert('Usuario y/o clave incorrectos');
-                        window.location.href='/index.php';
+                        window.location.href='/php/usuarios/iniciar.php';
                     </script>
 <?php
                 }
