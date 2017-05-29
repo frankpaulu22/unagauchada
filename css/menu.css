@@ -258,12 +258,10 @@ header label {
 
 .publicar input[type="submit"] {
     background: rgba(0,1,10,2);
-    border: 0;
     color: white;
     opacity: 0.8;
     cursor: pointer;
-    border-radius: 20px;
-    margin-bottom: 0;
+    margin-bottom: 10px;
 }
 
 .publicar input[type="submit"]:hover {

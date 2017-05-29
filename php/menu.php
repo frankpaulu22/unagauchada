@@ -13,11 +13,10 @@
     <nav class="menu">
         <ul class= "accesos">
             <?php
-                include('usuarios/claseuser.php');
                 include('conexion.php');
                 session_start();                
                 
-                if($_SESSION['estado']=='logeado'){ 
+                if(isset($_SESSION['estado']) && $_SESSION['estado']=='logeado'){ 
                     $userid = $_SESSION['usuario'];
                     $conuser = "SELECT * FROM usuarios WHERE id_usuario='$userid'";
                     $resuser = mysqli_query($conexion, $conuser);
