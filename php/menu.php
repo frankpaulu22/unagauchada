@@ -1,15 +1,11 @@
 <head>
     <script src="/js/validarlogin.js"></script>
-    <script src="/js/query.js"></script>﻿
     <link rel="stylesheet" href="/css/menu.css">
-    <link rel="stylesheet" href="/css/fontello.css">
     <link rel="icon" type="image/png" href="/img/logo.png" />
 </head>
 <header>
-    <IMG class="banner" SRC="/img/ban1.jpg">
+    <IMG class="banner" SRC="/img/ban1(new).jpg">
     <a href="/index.php"><IMG class="logo" SRC="/img/logo.png"></a>
-    <input type="checkbox" id="btn-menu">
-    <label for="btn-menu" class="icon-th-list"></label>
     <nav class="menu">
         <ul class= "accesos">
             <?php
@@ -25,7 +21,6 @@
             ?>
                 <li class='submenu'><a href="#"><?php echo $varuser['email']; ?></a>
                     <ul>
-                        <li><a href="/php/usuarios/perfil.php">Perfil</a>
                         <li><a href="/php/usuarios/cerrar.php">Salir</a>    
                     </ul> 
                 </li>  
@@ -40,4 +35,3 @@
         </ul>
     </nav>
 </header>
-<script src="/js/menu.js"></script>

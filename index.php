@@ -23,13 +23,11 @@
             while ($lista = mysqli_fetch_array($resultado)) {
                 ?>
                 <div id='elemento'>
-                <?php
-                    ?><div id='eletitulo'><?php echo $lista['titulo']; ?></div><?php
-                    ?><div id='elpostulantes'>Postulantes: <?php echo $lista['postulantes']; ?></div><?php
-                    ?><div id='elecategoria'>Categoria: <?php echo $lista['categoria']; ?></div><?php
-                    ?><div id='eleciudad'>En: <?php echo $lista['ciudad']; ?></div><?php
-                    ?><div id='eledescripcion'><?php echo $lista['descripcion']; ?></div><?php
-                    ?><div id="eleimagen"><img height="240px" src="data:<?php echo $lista['extension']; ?>;base64,<?php echo base64_encode($lista['foto']); ?>"/></div><?php
+                    <div id='eletitulo'><?php echo $lista['titulo']; ?></div>
+                    <div id='elecategoria'>Categoria: <?php echo $lista['categoria']; ?></div>
+                    <div id='eleciudad'>En: <?php echo $lista['ciudad']; ?></div>
+                    <div id='eledescripcion'><?php echo $lista['descripcion']; ?></div>
+                    <div id="eleimagen"><img height="240px" src="data:<?php echo $lista['extension']; ?>;base64,<?php echo base64_encode($lista['foto']); ?>"/></div><?php
                     if (isset($_SESSION['estado']) && $_SESSION['estado']== 'logeado'){
                         ?><div id='eledetalle'><a href="php/gauchada/detalle.php?ga=<?php echo $lista['id_gauchada']; ?>" >Detalle</a></div><?php
                     }

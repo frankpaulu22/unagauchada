@@ -1,6 +1,14 @@
 <?php
 	include('../conexion.php');
 
+	if(!isset($_POST['email'])){
+?> 
+        <script>
+            window.location.href='/index.php';
+        </script> 
+<?php 
+	}
+
 	$email = $_POST['email'];
 
 	$seleccionar = "SELECT * FROM usuarios WHERE email='$email'"; 

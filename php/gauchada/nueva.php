@@ -6,25 +6,42 @@
 <?php 
 	include("../conexion.php");
 	include("../menu.php");
-	$usrid = $_GET['usid']; 
-	$consulcredi = "SELECT creditos FROM usuarios WHERE id_usuario=$usrid";
-	$resulcredi = mysqli_query($conexion, $consulcredi);	
-	$totcredi = mysqli_fetch_assoc($resulcredi);
-	echo $totcredi['creditos'];
+	$usrid = $_GET['usid'];
+	if($usrid!=$_SESSION['usuario'] or !isset($_GET['usid'])){
+?> 
+        <script>
+            window.location.href='/index.php';
+        </script> 
+<?php   
+    } 
+	$consulusuario = "SELECT * FROM usuarios WHERE id_usuario=$usrid";
+	$resulusuario = mysqli_query($conexion, $consulusuario);	
+	$cosasusuario = mysqli_fetch_assoc($resulusuario);
 
-	if ($totcredi['creditos'] < 1 ){
+	if ($cosasusuario['creditos'] < 1 ){
 	?>   
 	    <script>
 	        alert('No tiene creditos suficientes');
-	        window.location.href='/php/comprar.php';
+	        window.location.href='/php/comprar.php?usid=<?php echo $usrid; ?>';
+	    </script>
+    <?php
+	}
+
+	if ($cosasusuario['adeuda'] == 1 ){
+	?>   
+	    <script>
+	        alert('Usted adeuda calificaciones');
+	        window.location.href='/index.php';
 	    </script>
     <?php
 	}
 
 ?>
 
-	<form action='/php/gauchada/enviarnueva.php?usid=<?php echo $usrid ?>' method='POST' enctype="multipart/form-data" class="publicar">
+	<form action='/php/gauchada/enviarnueva.php' method='POST' enctype="multipart/form-data" class="publicar">
 		<h1>Complete los datos</h1>
+		<h5>Los campos con un * son obligatorios</h5>
+		<input type='hidden' name='userid' value="<?php echo $usrid ?>">
 		<input type='text' name='titulo' MAXLENGTH="30" placeholder='Titulo*' required>
 
 	    <select name="categoria" id="categoria" value="" required>
@@ -32,7 +49,7 @@
 	        	$consulcate = 'SELECT * FROM categorias';
 	        	$rescate = mysqli_query($conexion, $consulcate);
 	        ?>
-	        <option disabled selected hidden>Categoria</option>
+	        <option disabled selected hidden value="">Categoria*</option>
 	        <?php    
 	        while ($arrcate = mysqli_fetch_array($rescate)){
 	        ?>
@@ -50,7 +67,7 @@
 	        	$consulciu = 'SELECT * FROM ciudades';
 	        	$resciu = mysqli_query($conexion, $consulciu);
 	        ?>
-	        <option disabled selected hidden>Ciudad</option>
+	        <option disabled selected hidden value="">Ciudad*</option>
 	        <?php    
 	        while ($arrciu = mysqli_fetch_array($resciu)){
 	        ?>
@@ -64,8 +81,8 @@
 	    </select>
 
 
-	    <textarea class="textarea" MAXLENGTH="300" name='descripcion' placeholder="Descripcion" required></textarea>
-	    <input type='file' name='imagen' placeholder='Imagen*' required>
+	    <textarea class="textarea" MAXLENGTH="300" name='descripcion' placeholder="Descripcion*" required></textarea>
+	    <input type='file' name='imagen'>
 	    <input type='submit' value='Publicar'>
 	    <input type='reset' value='Cancelar'>
 	</form>
