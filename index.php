@@ -13,7 +13,7 @@
                 ?><div id='publicar'><a href="php/gauchada/nueva.php?usid=<?php echo $varuser['id_usuario']; ?>" >Publicar</a></div><?php
             }
 
-            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad";
+            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad ORDER BY postulantes, id_gauchada DESC";
             $resultado = mysqli_query($conexion, $consulta);
 
             ?>
@@ -25,10 +25,11 @@
                 <div id='elemento'>
                 <?php
                     ?><div id='eletitulo'><?php echo $lista['titulo']; ?></div><?php
+                    ?><div id='elpostulantes'>Postulantes: <?php echo $lista['postulantes']; ?></div><?php
                     ?><div id='elecategoria'>Categoria: <?php echo $lista['categoria']; ?></div><?php
                     ?><div id='eleciudad'>En: <?php echo $lista['ciudad']; ?></div><?php
                     ?><div id='eledescripcion'><?php echo $lista['descripcion']; ?></div><?php
-                    ?><div id="eleimagen"><img height="120px" src="data:<?php echo $lista['extension']; ?>;base64,<?php echo base64_encode($lista['foto']); ?>"/></div><?php
+                    ?><div id="eleimagen"><img height="240px" src="data:<?php echo $lista['extension']; ?>;base64,<?php echo base64_encode($lista['foto']); ?>"/></div><?php
                     if (isset($_SESSION['estado']) && $_SESSION['estado']== 'logeado'){
                         ?><div id='eledetalle'><a href="php/gauchada/detalle.php?ga=<?php echo $lista['id_gauchada']; ?>" >Detalle</a></div><?php
                     }
