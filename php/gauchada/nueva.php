@@ -82,7 +82,7 @@
 
 
 	    <textarea class="textarea" MAXLENGTH="300" name='descripcion' placeholder="Descripcion*" required></textarea>
-	    <input type='file' name='imagen'>
+	    <input type='file' name='imagen' accept="image/png, image/jpg, image/jpeg">
 	    <input type='submit' value='Publicar'>
 	    <input type='reset' value='Cancelar'>
 	</form>

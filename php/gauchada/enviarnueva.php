@@ -2,6 +2,7 @@
 	if(isset($_POST['titulo'])){
 		include('../conexion.php');
 		$img = array('image/jpg', 'image/jpeg', 'image/png');
+		$restar= '1';
 		$titulo= $_POST['titulo'];
 		$categoria= $_POST['categoria'];
 		$ciudad= $_POST['ciudad'];
@@ -12,7 +13,7 @@
 		        ?>
 		        <script>
 		            alert('El tama\u00f1o de la imagen es muy grande');
-		            window.location.href="php/gauchada/nueva.php?usid=<?php echo $usrid; ?>";
+		            window.location.href="/php/gauchada/nueva.php?usid=<?php echo $usrid; ?>";
 		        </script>
 		        <?php
 		    }
@@ -31,28 +32,30 @@
 		        ?>
 		        <script>
 		            alert('La extension de la imagen no es un tipo de imagen valido');
-		            window.location.href='php/gauchada/nueva.php?usid=<?php echo $usrid; ?>';
+		            window.location.href='/php/gauchada/nueva.php?usid=<?php echo $usrid; ?>';
 		        </script>
 		        <?php
 		    }
-		    $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
-		    $extension = $_FILES['imagen']['type'];
+		    else{
+		    	$imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+		    	$extension = $_FILES['imagen']['type'];
+		    	$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$imagen', '$extension')";
+			    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
 
+				$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
+			    $updcreditos = mysqli_query($conexion, $update) or die ('Problemas en la consulta'. mysql_error());
+		    }
 		}
 		else {
 			$ruta= "logo.png";
 			$imagen = addslashes(file_get_contents($ruta));
 			$extension = "image/png";
-			echo $imagen;
+			$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$imagen', '$extension')";
+		    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
+
+			$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
+		    $updcreditos = mysqli_query($conexion, $update) or die ('Problemas en la consulta'. mysql_error());
 		}
-
-	    $restar= '1';
-
-		$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$imagen', '$extension')";
-	    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
-
-		$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
-	    $updcreditos = mysqli_query($conexion, $update) or die ('Problemas en la consulta'. mysql_error());
 
 ?>   
 	    <script>
