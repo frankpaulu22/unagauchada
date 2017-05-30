@@ -1,3 +1,8 @@
+/* Este codigo corresponde body */
+body {
+    background: #EADEC5;
+}
+
 /* Este codigo corresponde al diseño del menu */
 
 *{
@@ -23,7 +28,9 @@
 
 .logo {
     position: absolute;
-    top:160px;
+    top:200px;
+    background: white;
+    border-radius: 15px;
     left: 0px;
     z-index: 10;
 }

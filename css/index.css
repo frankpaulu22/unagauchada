@@ -9,15 +9,31 @@
 }
 
 #elemento {
-	background: orange;
+	background: #F0C87A;
     margin-bottom: 30px;
+    text-align: center;
+    border-radius: 15px;
 }
 
 #publicar {
 	position: absolute;
     top: 280px;
 	left:580px;
-	background: orange;
+	background: yellow;
 	text-decoration: none;
 
+}
+
+#eletitulo {
+    font-size: 28
+}
+
+#elecategoria {
+    margin-left: 5px;
+    text-align: left;
+}
+
+#eleciudad {
+    margin-left: 5px;
+    text-align: left;
 }
