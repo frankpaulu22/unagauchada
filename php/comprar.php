@@ -29,6 +29,7 @@
 		<input type='text' id="codigo" name='codigo' minlength="4" maxlength="4" placeholder='Codigo de seguridad*' required>
 	    <input type='number' min="1" oninput="return calcularcreditos();" id="cantcredi" name='cantcredi' placeholder='Cantidad de creditos*' required>
 	    <h4>Total a pagar: </h4><input type='text' id="total" readonly="readonly" name='total'>
+        <h5>Los campos con un * son obligatorios</h5>
 	    <input type='submit' value='Comprar'>
 	    <input type='reset' value='Cancelar'>
 	</form>
