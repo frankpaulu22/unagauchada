@@ -16,7 +16,8 @@
     <input type='text' maxlength="20" id="apellido" name='apellido' placeholder='Apellido*' required>
     <input type='email' maxlength="40" id="email" name='email' placeholder='Email*' required>
     <input type='password' maxlength="20" id="clave" name='clave' placeholder='Contraseña*' required>
-    <input type="date" name="fecha" max="2017-06-01" placeholder="Fecha de nacimiento*" required>
+    <label>Fecha de nacimiento*</label>
+    <input type="date" name="fecha" max="2017-06-01" required>
     <input type='text' maxlength="15" id="telefono" name='telefono' placeholder='Telefono*' required>
     <input type='submit' value='Registrarse'>
     <input type='reset' value='Cancelar'>

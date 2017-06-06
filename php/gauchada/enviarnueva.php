@@ -7,6 +7,7 @@
 		$categoria= $_POST['categoria'];
 		$ciudad= $_POST['ciudad'];
 		$descripcion= $_POST['descripcion'];
+		$expiracion= $_POST['expiracion'];
 		$usrid= $_POST['userid'];
 		if($_FILES['imagen']['tmp_name']!=""){
 		    if($_FILES['imagen']['size'] > 500000) {
@@ -39,7 +40,7 @@
 		    else{
 		    	$imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
 		    	$extension = $_FILES['imagen']['type'];
-		    	$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$imagen', '$extension')";
+		    	$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension')";
 			    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
 
 				$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
@@ -50,7 +51,7 @@
 			$ruta= "logo.png";
 			$imagen = addslashes(file_get_contents($ruta));
 			$extension = "image/png";
-			$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$imagen', '$extension')";
+			$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension')";
 		    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
 
 			$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";

@@ -25,10 +25,12 @@
 		<h4>Valor del credito: $50</h4>
 		<input type='hidden' name='userid' value="<?php echo $usrid ?>">
 		<input type='text' id="numtarjeta" name='numtarjeta' minlength="16" maxlength="16" placeholder='Numero de tarjeta*' required>
-		<input type='date' min="2017-06-01" max="2200-06-01" name='vencimiento' placeholder='Fecha de vencimiento*' required>
-		<input type='text' id="codigo" name='codigo' minlength="4" maxlength="4" placeholder='Codigo de seguridad*' required>
+		<label>Fecha de Vencimiento*</label>
+		<input type='date' min="2017-06-01" max="2200-06-01" name='vencimiento' required> <!–Hay que acomodar para que muestre solo mes y año–>
+		<input type='text' id="codigo" name='codigo' minlength="3" maxlength="4" placeholder='Codigo de seguridad*' required>
 	    <input type='number' min="1" oninput="return calcularcreditos();" id="cantcredi" name='cantcredi' placeholder='Cantidad de creditos*' required>
 	    <h4>Total a pagar: </h4><input type='text' id="total" readonly="readonly" name='total'>
+        <h5>Los campos con un * son obligatorios</h5>
 	    <input type='submit' value='Comprar'>
 	    <input type='reset' value='Cancelar'>
 	</form>

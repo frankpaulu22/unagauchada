@@ -82,6 +82,8 @@
 
 
 	    <textarea class="textarea" MAXLENGTH="300" name='descripcion' placeholder="Descripcion*" required></textarea>
+	    <label>Fecha de expiracion*</label>
+	    <input type="date" name="expiracion" min="2017-06-08" max="2080-06-08" required>
 	    <input type='file' name='imagen' accept="image/png, image/jpg, image/jpeg">
 	    <input type='submit' value='Publicar'>
 	    <input type='reset' value='Cancelar'>

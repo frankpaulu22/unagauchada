@@ -2,47 +2,47 @@
 	position: absolute;
 	top: 50%;
 	left: 30%;
-	font-size: 50px;
+	font-size: 45px;
 }
 
 #dueño {
 	position: absolute;
 	top: 40%;
-	right: 0px;
-	font-size: 50px;	
+	right: 2%;
+	font-size: 20px;	
 }
 
 #gauusuario {
 	position: absolute;
-	top: 50%;
-	left: 0px;
-	font-size: 30px;
+	top: 70%;
+	left: 2%;
+	font-size: 20px;
 }
 
 #gaucategoria {
 	position: absolute;
-	top: 55%;
-	left: 0px;
-	font-size: 30px;
+	top: 75%;
+	left: 2%;
+	font-size: 20px;
 }
 
 #gauciudad {
 	position: absolute;
-	top: 60%;
-	left: 0px;
-	font-size: 30px;
+	top: 80%;
+	left: 2%;
+	font-size: 20px;
 }
 
 #gaupostulantes {
 	position: absolute;
 	top: 40%;
 	left: 40%;
-	font-size: 40px;
+	font-size: 20px;
 }
 
 #gaudescripcion {
 	position: absolute;
-	top: 70%;
+	top: 130%;
 	left: 2%;
 	font-size: 30px;
 }
