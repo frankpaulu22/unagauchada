@@ -27,6 +27,10 @@
         <div id='gaupostulantes'>Postulantes: <?php echo $gauchada['cantpostulantes']; ?></div>	
 <?php
     }
+    else {
+?>      <div id='dueño'><a href="" >Preguntar</a></div>
+<?php
+    }
 
 ?>
     <div id='gautitulo'><?php echo $gauchada['titulo']; ?></div>

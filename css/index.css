@@ -1,3 +1,13 @@
+#filtro {
+    position: absolute;
+    width: 80%;
+    font-size: 12px;
+    margin: 0;
+    top: 280px;
+    left: 150px;
+    padding-bottom: 50px;
+}
+
 #listado {
     position: absolute;
     width: 80%;
