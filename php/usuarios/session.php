@@ -14,6 +14,13 @@
             </script>
 <?php
         }
+        else if($usr['baneado'] == 1) {
+?>
+            <script>
+                alert('Usuario baneado');
+                window.location.href='/index.php';
+            </script>
+<?php   }
         else {
             session_start();
             $_SESSION['estado'] = 'logeado';

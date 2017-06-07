@@ -14,7 +14,7 @@
                 ?><div id='publicar'><a href="php/gauchada/nueva.php?usid=<?php echo $varuser['id_usuario']; ?>" >Publicar</a></div><?php
             }
 
-            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion < '$caducidad' AND G.idpostulante = 0 ORDER BY postulantes, id_gauchada DESC";
+            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion < '$caducidad' AND G.idpostulante = 0 ORDER BY cantpostulantes, id_gauchada DESC";
             $resultado = mysqli_query($conexion, $consulta);
 
             ?>

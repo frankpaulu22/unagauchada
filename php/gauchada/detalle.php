@@ -24,7 +24,7 @@
 
     if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
 ?>		<div id='dueño'><a href="" >Soy el dueño</a></div>
-        <div id='gaupostulantes'>Postulantes: <?php echo $gauchada['postulantes']; ?></div>	
+        <div id='gaupostulantes'>Postulantes: <?php echo $gauchada['cantpostulantes']; ?></div>	
 <?php
     }
 
@@ -35,5 +35,30 @@
     <div id='gauciudad'>En: <?php echo $gauchada['ciudad']; ?></div>
     <div id='gaudescripcion'><?php echo $gauchada['descripcion']; ?></div>
     <div id="gauimagen"><img height="240px" src="data:<?php echo $gauchada['extension']; ?>;base64,<?php echo base64_encode($gauchada['foto']); ?>"/></div>
+    <div id="preguntas"><label>Preguntas</label>
+<?php
+        $listarpreguntas= "SELECT * FROM preguntas P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario";
+        $resulpreguntas= mysqli_query($conexion, $listarpreguntas);
+
+        while ($pregun = mysqli_fetch_array($resulpreguntas)) {
+?>
+            <div id='pregunta'>
+                <div id='pregusuario'>De: <?php echo $pregun['email']; ?></div>
+                <div id='pregpregunta'><?php echo $pregun['pregunta']; ?></div>
+<?php
+                if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
+?>                  <div id='responder'><a href="" >Responder</a></div>
+<?php
+                }
+?>
+            </div>
+            <br>
+<?php     
+        }
+
+?>
+
+
+    </div>
 </body>
 </html>
