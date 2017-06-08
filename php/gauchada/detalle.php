@@ -1,3 +1,4 @@
+<html>
 <?php
 	include("../menu.php");
 ?>
@@ -21,10 +22,13 @@
     $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE id_gauchada='$gaid'";
     $resultado = mysqli_query($conexion, $consulta);
     $gauchada= mysqli_fetch_assoc($resultado);
-
+    $consulta2 = "SELECT COUNT(idusuario) FROM postulantes WHERE idgauchada='$gaid'";
+    $resultado2= mysqli_query($conexion, $consulta2);
+    $postulantes = mysqli_fetch_row($resultado2);
     if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
 ?>		<div id='dueño'><a href="" >Soy el dueño</a></div>
-        <div id='gaupostulantes'>Postulantes: <?php echo $gauchada['cantpostulantes']; ?></div>	
+        <div id='gaupostulantes'>Postulantes: <?php echo $postulantes[0] ; ?>
+    </div>	
 <?php
     }
     else {
