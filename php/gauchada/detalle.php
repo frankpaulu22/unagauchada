@@ -45,7 +45,7 @@
     <div id="gauimagen"><img height="240px" src="data:<?php echo $gauchada['extension']; ?>;base64,<?php echo base64_encode($gauchada['foto']); ?>"/></div>
     <div id="preguntas"><label>Preguntas</label>
 <?php
-        $listarpreguntas= "SELECT * FROM preguntas P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario";
+        $listarpreguntas= "SELECT * FROM comentarios P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario";
         $resulpreguntas= mysqli_query($conexion, $listarpreguntas);
 
         while ($pregun = mysqli_fetch_array($resulpreguntas)) {
