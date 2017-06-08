@@ -25,7 +25,9 @@
 		<h2>Creditos: <?php echo $totcredi['creditos']; ?> </h2>
 		<h4>Valor del credito: $50</h4>
 		<input type='hidden' name='userid' value="<?php echo $usrid ?>">
-		<input type='text' id="numtarjeta" name='numtarjeta' minlength="16" maxlength="16" placeholder='Numero de tarjeta*' required>
+		<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="numtarjeta" name='numtarjeta' minlength="16" maxlength="16" placeholder='Numero de tarjeta*' required>
+        <h4>Codigo de seguridad:</h4>
+		<input type='text' onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="codtarjeta" name='codtarjeta' minlength="3" maxlength="4" placeholder='Codigo de seguridad*' required>
         <h4>Fecha de Vencimiento:</h4>
 		<select id="idmodelo" name="mes" required> 
             <option value>mes*</option> ==$0
