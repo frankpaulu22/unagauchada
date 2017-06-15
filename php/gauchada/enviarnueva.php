@@ -40,7 +40,11 @@
 		    else{
 		    	$imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
 		    	$extension = $_FILES['imagen']['type'];
-		    	$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto, extension) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension')";
+		    	$imagen2 = addslashes(file_get_contents($_FILES['imagen2']['tmp_name']));
+		    	$extension2 = $_FILES['imagen2']['type'];
+		    	$imagen3 = addslashes(file_get_contents($_FILES['imagen3']['tmp_name']));
+		    	$extension3 = $_FILES['imagen3']['type'];
+		    	$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto, extension, foto2, extension2, foto3, extension3) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension', '$imagen2', '$extension2', '$imagen3', '$extension3')";
 			    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
 
 				$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";

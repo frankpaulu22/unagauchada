@@ -13,51 +13,7 @@
             if ( isset($_SESSION['estado']) && $_SESSION['estado'] == 'logeado'){
                 ?><div id='publicar'><a href="php/gauchada/nueva.php?usid=<?php echo $varuser['id_usuario']; ?>" >Publicar</a></div><?php
             }
-?>
-            <div id="filtro">
-                <form action='/index.php' method='POST' enctype="multipart/form-data">
-                    <select name="categoria" id="categoria" value="">
-                        <?php
-                            $consulcate = 'SELECT * FROM categorias';
-                            $rescate = mysqli_query($conexion, $consulcate);
-                        ?>
-                        <option disabled selected hidden value="">Categoria</option>
-                        <?php    
-                        while ($arrcate = mysqli_fetch_array($rescate)){
-                        ?>
-                        <option value=" <?php echo $arrcate['id_categoria'] ?> " >
-                        <?php echo $arrcate['categoria']; ?>
-                        </option>
 
-                        <?php
-                        }    
-                        ?>       
-                    </select>
-
-                    <select name="ciudad" id="ciudad" value="">
-                        <?php
-                            $consulciu = 'SELECT * FROM ciudades';
-                            $resciu = mysqli_query($conexion, $consulciu);
-                        ?>
-                        <option disabled selected hidden value="">Ciudad</option>
-                        <?php    
-                        while ($arrciu = mysqli_fetch_array($resciu)){
-                        ?>
-                        <option value=" <?php echo $arrciu['id_ciudad'] ?> " >
-                        <?php echo $arrciu['ciudad']; ?>
-                        </option>
-
-                        <?php
-                        }    
-                        ?>       
-                    </select>
-                    <input type='text' maxlength="30" name="buscar" value="" placeholder="Titulo">
-                    <input type='text' maxlength="3" name="activo" value="yes" hidden="hidden">
-                    <input type='submit' value='Filtrar'>
-                    <input type='reset' value='Borrar'>
-                </form>
-            </div>
-<?php
             if(isset($_POST['activo'])){
                 if(!empty($_POST['buscar'])){
                     $buscar= $_POST['buscar'];
@@ -89,10 +45,85 @@
             }
 
 
-            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion < '$caducidad' AND G.idpostulante = 0 $filtrado ORDER BY cantpostulantes, id_gauchada DESC";
+            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion > '$caducidad' AND G.idpostulante = 0 $filtrado ORDER BY cantpostulantes, id_gauchada DESC";
             $resultado = mysqli_query($conexion, $consulta);
 
-            ?>
+?>
+            <div id="filtro">
+                <form action='/index.php' method='POST' enctype="multipart/form-data">
+                    <select name="categoria" id="categoria" value="">
+                        <?php
+                            $consulcate = 'SELECT * FROM categorias';
+                            $rescate = mysqli_query($conexion, $consulcate);
+                            if(isset($_POST['categoria'])) {
+                                $valorcate = "SELECT * FROM categorias WHERE id_categoria= '$filcat'";
+                                $resvalorcate = mysqli_query($conexion, $valorcate);
+                                $mostrarcate = mysqli_fetch_array($resvalorcate);
+?> 
+                                <option selected hidden value="<?php echo $mostrarcate[0]; ?>"><?php echo $mostrarcate[1]; ?> </option>
+<?php
+                            }
+                            else {
+?> 
+                                <option disabled selected hidden value="">Categoria</option>
+<?php
+                            }
+
+                        while ($arrcate = mysqli_fetch_array($rescate)){
+                        ?>
+                        <option value=" <?php echo $arrcate['id_categoria'] ?> " >
+                        <?php echo $arrcate['categoria']; ?>
+                        </option>
+
+                        <?php
+                        }    
+                        ?>       
+                    </select>
+
+                    <select name="ciudad" id="ciudad" value="">
+                        <?php
+                            $consulciu = 'SELECT * FROM ciudades';
+                            $resciu = mysqli_query($conexion, $consulciu);
+                        ?>
+<?php 
+                            if(isset($_POST['ciudad'])) {
+                                $valorciu = "SELECT * FROM ciudades WHERE id_ciudad= '$filciu'";
+                                $resvalorciu = mysqli_query($conexion, $valorciu);
+                                $mostrarciu = mysqli_fetch_array($resvalorciu);
+?> 
+                                <option selected hidden value="<?php echo $mostrarciu[0]; ?>"><?php echo $mostrarciu[2]; ?> </option>
+<?php
+                            }
+                            else {
+?> 
+                                <option disabled selected hidden value="">Ciudad</option>
+<?php
+                            }
+
+                        while ($arrciu = mysqli_fetch_array($resciu)){
+                        ?>
+                        <option value=" <?php echo $arrciu['id_ciudad'] ?> " >
+                        <?php echo $arrciu['ciudad']; ?>
+                        </option>
+
+                        <?php
+                        }    
+                        ?>       
+                    </select>
+                    <input type='text' maxlength="30" name="buscar" value="<?php
+                    if(!empty($_POST['buscar'])){
+                        echo $_POST['buscar'];
+                    }
+                    else {
+                        echo '';
+                    }
+?>" placeholder="Titulo">
+                    <input type='text' maxlength="3" name="activo" value="yes" hidden="hidden">
+                    <input type='submit' value='Filtrar'>
+                    <input type='reset' value='Borrar'>
+                </form>
+            </div>
+
             <div id='listado'>
             <?php
 
