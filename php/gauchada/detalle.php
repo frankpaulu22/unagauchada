@@ -30,13 +30,18 @@
         while($postulantes= mysqli_fetch_array($resultado2)) {
             echo "</br>";
             echo "<hr/>";
-            echo $postulantes['email'];
 ?>
-            <a href="/php/gauchada/elegirpostu.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>" >Elegir</a>
+            <a target="_blank" href="" ><?php echo $postulantes['email']; ?></a>
+            <a target="_blank" onclick="return confirm('Esta seguro?')" href="/php/gauchada/elegirpostu.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Elegir</a>
 <?php
         }
 ?>
         </div>
+
+        <div id='dueño'>
+            <a href="/php/gauchada/eliminar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Eliminar</a>
+        </div>
+
 <?php
     }
     else {
@@ -84,7 +89,7 @@
     </div>
     <div id="preguntas"><label>Preguntas:</label>
 <?php
-        $listarpreguntas= "SELECT * FROM comentarios P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario";
+        $listarpreguntas= "SELECT * FROM comentarios P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario ORDER BY id_comentario";
         $resulpreguntas= mysqli_query($conexion, $listarpreguntas);
 
         while ($pregun = mysqli_fetch_array($resulpreguntas)) {
@@ -93,10 +98,10 @@
                 </br>
                 <hr />
                 <div id='pregusuario'>De: <?php echo $pregun['email']; ?></div>
-                <div id='pregpregunta'><?php echo $pregun['pregunta']; ?></div>
+                <div id='pregpregunta'><?php echo $pregun['pregunta']; echo "</br>"; echo "---"; echo $pregun['respuesta']; ?></div>
 <?php
                 if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
-?>                  <div id='responder'><a href="" >Responder</a></div>
+?>                  <div id='responder'><a href="/php/gauchada/responder.php?comid=<?php echo $pregun['id_comentario']; ?>&gaid=<?php echo $gaid ?>" >Responder</a></div>
 <?php
                 }
 ?>

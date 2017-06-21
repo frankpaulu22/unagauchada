@@ -50,3 +50,9 @@
 #eledescripcion {
     margin-left: 5px;
 }
+
+.pregunta {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+}

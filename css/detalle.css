@@ -62,3 +62,9 @@
 	font-size: 30px;
 	background: orange;
 }
+
+#finpostu {
+	position: absolute;
+	top: 40%;
+	left: 30%;
+}

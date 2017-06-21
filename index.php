@@ -45,7 +45,7 @@
             }
 
 
-            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion > '$caducidad' AND G.idpostulante = 0 $filtrado ORDER BY cantpostulantes, id_gauchada DESC";
+            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion > '$caducidad' AND G.borrada = 0 AND G.idpostulante = 0 $filtrado ORDER BY cantpostulantes, id_gauchada DESC";
             $resultado = mysqli_query($conexion, $consulta);
 
 ?>
@@ -120,7 +120,7 @@
 ?>" placeholder="Titulo">
                     <input type='text' maxlength="3" name="activo" value="yes" hidden="hidden">
                     <input type='submit' value='Filtrar'>
-                    <input type='reset' value='Borrar'>
+                    <input type="button" onclick="location.href='/index.php';" value="Borrar" />
                 </form>
             </div>
 
