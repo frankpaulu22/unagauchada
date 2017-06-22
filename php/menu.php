@@ -19,7 +19,7 @@
                     $varuser= mysqli_fetch_assoc($resuser);
 
             ?>
-                <li class='submenu'><a href="#"><?php echo $varuser['email']; ?></a>
+                <li class='submenu'><a href="/php/usuarios/miperfil.php"><?php echo $varuser['email']; ?></a>
                     <ul>
                         <li><a href="/php/usuarios/cerrar.php">Salir</a>    
                     </ul> 
