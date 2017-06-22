@@ -73,7 +73,7 @@
     <div id='gauciudad'>En: <?php echo $gauchada['ciudad']; ?></div>
     <div id='gaudescripcion'><?php echo $gauchada['descripcion']; ?></div>
     <div id="gauimagen">
-        <img height="240px" src="data:<?php echo $gauchada['extension']; ?>;base64,<?php echo base64_encode($gauchada['foto']);?>"/>
+        <img height="240px" src="data:<?php echo $gauchada['extension']; ?>;base64,<?php echo base64_encode($gauchada['foto1']);?>"/>
 <?php
         if(!empty($gauchada['foto2'])) {
 ?>
