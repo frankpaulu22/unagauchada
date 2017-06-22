@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Perfil</title>
+  <title>MiPerfil</title>
   <link rel="stylesheet" href="/css/miperfil.css">
 </head>
 <body>
@@ -34,12 +34,13 @@
     
     <div id='perfil'>Perfil:
         <div id='foto'><img height="240px" src="data:<?php echo $usuario['extension']; ?>;base64,<?php echo base64_encode($usuario['foto']); ?>"/></div>
-        <div id='pnombre'> <?php echo $usuario['nombre']; ?></div>
-        <div id='papellido'> <?php echo $usuario['apellido']; ?></div>
-        <div id='pnacimiento'> <?php echo $usuario['nacimiento']; ?></div>
-        <div id='ptelefono'> <?php echo $usuario['telefono']; ?></div>
-        <div id='pcreditos'> <?php echo $usuario['creditos']; ?></div>
-        <div id='pemail'> <?php echo $usuario['email']; ?></div>
+        <div id='pnombre'>Nombre:<?php echo $usuario['nombre']; ?></div>
+        <div id='papellido'>Apellido:<?php echo $usuario['apellido']; ?></div>
+        <div id='pnacimiento'>Fecha:<?php echo $usuario['nacimiento']; ?></div>
+        <div id='ptelefono'>Telefono:<?php echo $usuario['telefono']; ?></div>
+        <div id='pcreditos'>Creditos:<?php echo $usuario['creditos']; ?></div>
+        <div id='pemail'>Email:<?php echo $usuario['email']; ?></div>
+        <div id='ppuntos'>Puntos:<?php echo $usuario['puntos']; ?></div>
     </div>
         
     
@@ -72,6 +73,8 @@
     ?>    
     </div>
     </div>
+    
+    <div id='Modificar'><a href="php/usuarios/modificar.php?usid=<?php echo $_SESSION['usuario']; ?>" >Modificar perfil</a></div>
         
 </body>
 </html>
