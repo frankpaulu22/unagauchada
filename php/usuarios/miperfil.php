@@ -48,7 +48,7 @@
     <?php
         while($gauchada= mysqli_fetch_array($resultado1)) {
             ?>
-            <div id='eledetalle'><a href="php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>">g<?php $gauchada['titulo']?></a></div>
+            <div id='gau'><a href="php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>"><?php echo $gauchada['titulo']?></a></div>
             
         
     <?php
@@ -63,9 +63,9 @@
     <div id='comentario'>
     <?php
         while($comentario= mysqli_fetch_array($resultado2)) {
-            echo $comentario['pregunta'];
-            echo "</br>";
-    ?>
+            ?>
+            <div id='gau'><a href="php/gauchada/detalle.php?ga=<?php echo $comentario['idgauchada']; ?>"><?php echo $comentario['pregunta'];?></a></div>
+            
         
     <?php
         }
