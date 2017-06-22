@@ -37,18 +37,28 @@
 
     #pcreditos {
 	position: absolute;
-	top: 400px;
+	top: 450px;
 	font-size: 22px;
 }
 
     #pnacimiento {
 	position: absolute;
+	top: 400px;
+	font-size: 22px;
+}
+
+    #ppuntos {
+	position: absolute;
 	top: 425px;
 	font-size: 22px;
 }
 
-
-
+#modificar {
+	position: absolute;
+	top: 50%;
+    right: 0%;
+	font-size: 22px;
+}
 
 #comentarios {
 	position: absolute;
