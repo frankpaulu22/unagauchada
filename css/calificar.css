@@ -1,0 +1,37 @@
+#textarea {
+	position: absolute;
+    top: 300px;
+}
+
+#Responder {
+	position: absolute;
+	top: 300px;
+	font-size: 22px;
+}
+
+#pos {
+	position: absolute;
+	top: 350px;
+    width: 10px;
+    z-index: 10;
+}
+
+#neg {
+	position: absolute;
+	top: 350px;
+    width: 10px;
+    z-index: 10;
+}
+
+#neut {
+	position: absolute;
+	top: 350px;
+    width: 10px;
+    z-index: 10;
+}
+
+#descripcion {
+	position: absolute;
+	top: 375px;
+	font-size: 22px;
+}

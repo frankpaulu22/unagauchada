@@ -1,0 +1,39 @@
+#perfil {
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	font-size: 45px;
+}
+
+    #foto {
+	position: absolute;
+    left: 0px;
+    z-index: 10;
+}
+
+    #pnombre {
+	position: absolute;
+	top: 300px;
+	font-size: 22px;
+}
+
+    #papellido {
+	position: absolute;
+	top: 325px;
+	font-size: 22px;
+}
+
+    #pnacimiento {
+	position: absolute;
+	top: 350px;
+	font-size: 22px;
+    width: 200;
+}
+
+    #ppuntos {
+	position: absolute;
+	top: 375px;
+	font-size: 22px;
+    width: 200;
+}
+

@@ -33,6 +33,7 @@
 	position: absolute;
 	top: 375px;
 	font-size: 22px;
+    
 }
 
     #pcreditos {
@@ -45,12 +46,14 @@
 	position: absolute;
 	top: 400px;
 	font-size: 22px;
+    width: 200;
 }
 
     #ppuntos {
 	position: absolute;
 	top: 425px;
 	font-size: 22px;
+    width: 200;
 }
 
 #modificar {
