@@ -28,6 +28,7 @@
 		<form action="/php/gauchada/enviarrespuesta.php" method="POST" class="pregunta" >
 			<h5><?php echo $pregunta['pregunta']; ?></h5>
 			<input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
+            <input type="hidden" name="comid" value="<?php echo $comid; ?>">
 			<textarea class="textarea" MAXLENGTH="300" name='respuesta' placeholder="Escriba aqui su respuesta*" required></textarea>
 			<input type="submit" name="Responder">
 		</form>

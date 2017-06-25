@@ -37,7 +37,8 @@
 	    	$postulantes= mysqli_fetch_array($resultado2);
 	            echo "</br>";
 	            echo "A elegido a ";
-	            echo $postulantes['email'];
+	            echo $postulantes['apellido'];
+                echo $postulantes['nombre'];
 	            echo " para realizar la gauchada";
 	            echo "</br>";
             	echo "<hr/>";
@@ -47,7 +48,8 @@
     			$consulta3 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario <> '$posid' AND P.idusuario=U.id_usuario";
     			$resultado3= mysqli_query($conexion, $consulta3);
  		        while($postulantes2= mysqli_fetch_array($resultado3)) {
-        		    echo $postulantes2['email'];
+        		    echo $postulantes['apellido'];
+                    echo $postulantes['nombre'];
         		}
 
 

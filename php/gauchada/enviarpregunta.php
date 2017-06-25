@@ -4,7 +4,7 @@
 	$userid= $_POST['usid'];
 	$gauid= $_POST['gaid'];
 
-	$insertar= "INSERT INTO comentarios(idgauchada, idusuario, pregunta) VALUES ('$gauid', '$userid', '$pregunta')";
+	$insertar= "INSERT INTO comentarios(idgauchada, idusuario, pregunta, respuesta) VALUES ('$gauid', '$userid', '$pregunta', '')";
 	$consulta= mysqli_query($conexion, $insertar);
 
 ?>
