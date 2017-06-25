@@ -17,16 +17,21 @@
 ?>
 <form action='/php/usuarios/enviarregistro.php' method='POST' class='formulario' onsubmit="return validaremail();" oninput="return validartelefono();">
 	<h1>Complete el formulario</h1>
-  <h5>Los campos con un * son obligatorios</h5>
-    <input type='text' maxlength="20" id="nombre" name='nombre' placeholder='<?php echo $usuario['nombre']?>*' required>
-    <input type='text' maxlength="20" id="apellido" name='apellido' placeholder='<?php echo $usuario['apellido']?>*' required>
-    <input type='email' maxlength="40" id="email" name='email'  placeholder='<?php echo $usuario['email']?>*' required>
-    <input type='password' maxlength="20" id="clave" name='clave' placeholder='clave nueva*' required>
-    <label>Fecha de nacimiento*</label>
-    <input type="date" name="fecha" max="2017-06-01" required placeholder="<?php echo $usuario['nacimiento']?>*">
-    <input type='text' maxlength="15" id="telefono" name='telefono' placeholder='<?php echo $usuario['telefono']?>*' required>
+  <h5>Complete los campos que quiera modificar</h5>
+    <label>Nombre</label>
+    <input type='text' maxlength="20" id="nombre" name='nombre' value='<?php echo $usuario['nombre']?>' required>
+    <label>Apellido</label>
+    <input type='text' maxlength="20" id="apellido" name='apellido' value='<?php echo $usuario['apellido']?>' required>
+    <input type='hidden' maxlength="40" id="email" name='email'  placeholder='<?php echo $usuario['email']?>' required>
+    <label>Clave de seguridad</label>
+    <input type='password' maxlength="20" id="clave" name='clave' value='<?php echo $usuario['clave']?>' required>
+    <label>Fecha de nacimiento</label>
+    <input type="date" name="fecha" max="2017-06-01"  value="<?php echo $usuario['nacimiento']?>">
+    <label>Telefono</label>
+    <input type='text' maxlength="15" id="telefono" name='telefono' value='<?php echo $usuario['telefono']?>' required>
+    <label>Imagen de perfil</label>
     <input type='file' name='imagen' accept="image/png, image/jpg, image/jpeg">
-    <h5>Confirma tu clave anterior antes de continuar</h5>
+    <h5>Confirma tu clave actual antes de continuar</h5>
     <input type='password' maxlength="20" id="clave" name='claveold' placeholder='clave actual*' required>
     <input type='submit' value='Modificar'>
     <input type='reset' value='Cancelar'>
