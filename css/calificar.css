@@ -1,37 +1,34 @@
-#textarea {
+#formu {
 	position: absolute;
-    top: 300px;
+	top: 450px;
+	font-size: 22px;
+    left: 40%;
 }
 
-#Responder {
+#justificacion {
+    width: 250px;
+    height: 250px;
+}
+
+#calificacion {
 	position: absolute;
-	top: 300px;
+    top: -20px;
+}
+
+#titulo {
+	position: absolute;
+	top: -70px;
 	font-size: 22px;
 }
 
-#pos {
+#postulante {
 	position: absolute;
-	top: 350px;
-    width: 10px;
-    z-index: 10;
+	top: -45px;
+	font-size: 12px;
 }
 
-#neg {
+#enviar {
 	position: absolute;
-	top: 350px;
-    width: 10px;
-    z-index: 10;
-}
-
-#neut {
-	position: absolute;
-	top: 350px;
-    width: 10px;
-    z-index: 10;
-}
-
-#descripcion {
-	position: absolute;
-	top: 375px;
-	font-size: 22px;
+	top: 265px;
+	font-size: 12px;
 }

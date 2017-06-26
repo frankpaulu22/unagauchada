@@ -68,3 +68,16 @@
 	top: 40%;
 	left: 30%;
 }
+
+#preguntar {
+	position: absolute;
+	top: 165%;
+	left: 0%;
+	font-size: 21px;
+}
+
+#postularse {
+	position: absolute;
+	top: 166%;
+	left: 40%;
+}
