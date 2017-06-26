@@ -38,37 +38,38 @@
 		        <?php
 		    }
 		    else{
-		    	$imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
-		    	$extension1 = $_FILES['imagen']['type'];
-		    	
-                if (empty($_FILES['imagen3']['tmp_name'])){
-                    if(empty($_FILES['imagen2']['tmp_name'])){
-                        $insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto1, extension1) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension1')";
-                    }
-                    else{
-                        $imagen2 = addslashes(file_get_contents($_FILES['imagen2']['tmp_name']));
-		    	$extension2 = $_FILES['imagen2']['type'];
-                        $insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto1, extension1, foto2, extension2) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension1', '$imagen2', '$extension2')";
-                    }
+                    $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+  		    	    $extension = $_FILES['imagen']['type'];
+                if(!empty($_FILES['imagen2']['tmp_name'])){
+                    $imagen2 = addslashes(file_get_contents($_FILES['imagen2']['tmp_name']));
+ 		    	    $extension2 = $_FILES['imagen2']['type'];
                 }
                 else{
-                    $imagen3 = addslashes(file_get_contents($_FILES['imagen3']['tmp_name']));
-		    	$extension3 = $_FILES['imagen3']['type'];
-                    $insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto1, extension1, foto2, extension2, foto3, extension3) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension1', '$imagen2', '$extension2', '$imagen3', '$extension3')";
+                    $imagen2 ='';
+                    $extension2 = '';
                 }
-		    	
-			    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
+                if(!empty($_FILES['imagen3']['tmp_name'])){
+ 		    	    $imagen3 = addslashes(file_get_contents($_FILES['imagen3']['tmp_name']));
+ 		    	    $extension3 = $_FILES['imagen3']['type'];
+                }
+                else{
+                    $imagen3 ='';
+                    $extension3 = '';
+                }
+ 		    	    $insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto1, extension1, foto2, extension2, foto3, extension3) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension', '$imagen2', '$extension2', '$imagen3', '$extension3')";
+                
+                    $resultado = mysqli_query($conexion, $insertar);
 
-				$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
-			    $updcreditos = mysqli_query($conexion, $update) or die ('Problemas en la consulta'. mysql_error());
+				    $update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
+                    $updcreditos = mysqli_query($conexion, $update);
 		    }
 		}
 		else {
 			$ruta= "logo.png";
 			$imagen = addslashes(file_get_contents($ruta));
 			$extension1 = "image/png";
-			$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto, extension1) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension1')";
-		    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysql_error());
+			$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto1, extension1) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension1')";
+		    $resultado = mysqli_query($conexion, $insertar);
 
 			$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
 		    $updcreditos = mysqli_query($conexion, $update) or die ('Problemas en la consulta'. mysql_error());

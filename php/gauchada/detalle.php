@@ -28,13 +28,14 @@
     if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
 ?>		<div id='gaupostulantes'>Postulantes:
 <?php
-        echo "<hr>";
+        echo "<br>";
+        echo "<br>";
         while($postulantes= mysqli_fetch_array($resultado2)) {
-            echo "</br>";
+            echo "<hr/>";
 ?>
             <a target="_blank" href="/php/usuarios/perfil.php?usid=<?php echo $postulantes['id_usuario'];?>" ><?php echo $postulantes['apellido'];?> <?php echo $postulantes['nombre']; ?></a>
             <?php
-            if($gauchada['idpostulante'] != 0 && $gauchada['expiracion'] < $caducidad){
+            if($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
             ?>
                 <a target="_blank" onclick="return confirm(' esta seguro?')" href="/php/gauchada/elegirpostu.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Elegir</a>
             <?php
@@ -66,25 +67,24 @@
 <?php
     }
     else {
-?>      <div id='dueño'>
-            <a href="/php/gauchada/preguntar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Realizar preguntar</a>
+?>      
+    <?php if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){?>
+            <div id='preguntar'><a href="/php/gauchada/preguntar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Realizar una pregunta</a></div>
 <?php
             $usuario= $_SESSION['usuario'];
-            $consulta3 = "SELECT COUNT(*) FROM postulantes WHERE idgauchada='$gaid' AND idusuario='$usuario'";
+            $consulta3 = "SELECT * FROM postulantes WHERE idgauchada='$gaid' AND idusuario='$usuario'";
             $resultado3= mysqli_query($conexion, $consulta3);
-            $postulado= mysqli_fetch_row($resultado3);
-            if($postulado[0] == 0) {
+            $postulado= mysqli_num_rows($resultado3);
+            if($postulado == 0){
 ?>
                 <form action='/php/gauchada/postularce.php' method='POST'>
                     <input type='hidden' name='userid' value="<?php echo $_SESSION['usuario'] ?>">
                     <input type='hidden' name='gauchadaid' value="<?php echo $gaid ?>">
-                    <input type='submit' value='Postularse'>
+                    <div id='postularse'><input type='submit' value='Postularse'></div>
                 </form>
 <?php
+                }
             }
-?>    
-        </div>
-<?php
     }
 
 ?>
@@ -123,6 +123,7 @@
 <?php
                 if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
                         ?> 
+                <?php if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){?>
                         <div id='responder'><a href="/php/gauchada/responder.php?comid=<?php echo $pregun['id_comentario']; ?>&gaid=<?php echo $gaid ?>" >
                             <?php if ($pregun['respuesta'] == ""){
                             ?>
@@ -136,7 +137,9 @@
                             }
                             ?>
                             </a></div>
-    
+                <?php
+                    }
+                ?>
 <?php
                 }
 ?>
