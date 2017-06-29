@@ -25,6 +25,10 @@
     $gauchada= mysqli_fetch_assoc($resultado);
     $consulta2 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario";
     $resultado2= mysqli_query($conexion, $consulta2);
+    
+    $consulta4 = "SELECT * FROM calificaciones WHERE idgauchada=$gaid";
+    $resultado4 = mysqli_query($conexion, $consulta4);
+    $calificado= mysqli_num_rows($resultado4);
     if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
 ?>		<div id='gaupostulantes'>Postulantes:
 <?php
@@ -41,7 +45,7 @@
             <?php
             }
             else{
-                if($gauchada['idpostulante'] == $postulantes['id_usuario']){
+                if($gauchada['idpostulante'] == $postulantes['id_usuario'] && $calificado == 0){
             ?>
                     <a target="_blank" onclick="return confirm(' esta seguro?')" href="/php/gauchada/calificar.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Calificar</a>
             <?php
