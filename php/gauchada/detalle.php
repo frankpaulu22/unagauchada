@@ -59,7 +59,7 @@
 
     <?php
     
-    if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
+    if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad && !$gauchada['borrada']){
     ?>
         <div id='dueño'>
             <a href="/php/gauchada/eliminar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Eliminar Gauchada</a>
