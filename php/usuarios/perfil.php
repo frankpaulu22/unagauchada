@@ -29,6 +29,9 @@
     $resultado3= mysqli_query($conexion, $ranks);
     $rango = mysqli_fetch_assoc($resultado3);
     
+    $cali = "SELECT * FROM calificaciones  WHERE idpostulante='$usuario[id_usuario] '";
+    $resultado1= mysqli_query($conexion, $cali);
+    
     ?>
     
     <div id='perfil'>Perfil:
@@ -37,6 +40,22 @@
         <div id='papellido'>Apellido:<?php echo $usuario['apellido']; ?></div>
         <div id='pnacimiento'>Fecha:<?php echo $usuario['nacimiento']; ?></div>
         <div id='ppuntos'>Rango:<?php echo $rango['nombre']; ?></div>
+    </div>
+    
+    <div id='calificaciones'>Calificaciones:
+        <div id='calificacion'>
+            <?php
+            while($calificacion= mysqli_fetch_array($resultado1)) {
+                
+            echo "<hr/>";
+            echo $calificacion['puntaje'];
+            echo "<hr/>";
+            echo $calificacion['comentario'];
+            echo "<hr/>";
+            echo "<br>";
+                }
+            ?>
+            </div>
     </div>
     
     
