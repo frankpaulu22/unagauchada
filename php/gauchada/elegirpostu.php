@@ -14,6 +14,7 @@
 	include('../conexion.php');
 	$posid= $_GET['po'];
     $gaid= $_GET['gau'];
+    $userid= $_SESSION['usuario'];
 
 	$select= "SELECT * FROM gauchadas WHERE id_gauchada='$gaid'";
 	$resultado= mysqli_query($conexion, $select);
@@ -55,6 +56,10 @@
 
 				$selecpostu = "UPDATE gauchadas SET idpostulante='$posid' WHERE id_gauchada='$gaid'";
 				$consulta = mysqli_query($conexion, $selecpostu);
+        
+                $adeuda = "UPDATE usuarios SET adeuda='1' WHERE id_usuario='$userid'";
+				$consulta = mysqli_query($conexion, $adeuda);
+                
 				echo "</br>";
 				echo "</br>";
 				echo "</br>";

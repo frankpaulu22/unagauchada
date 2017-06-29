@@ -4,6 +4,7 @@
     $gauid= $_POST['gaid'];
 	$calificacion= $_POST['calificacion'];
     $justificacion= $_POST['justificacion'];
+    $userid= $_SESSION['usuario'];
 
 	$consulta1= "INSERT INTO calificaciones(idgauchada, idpostulante, comentario, puntaje) VALUES ('$gauid', '$idpostulante', '$justificacion', '$calificacion')";
 	$insertar= mysqli_query($conexion, $consulta1);
@@ -26,6 +27,9 @@
 
     $update= "UPDATE usuarios SET puntos=$cal WHERE id_usuario= $idpostulante";
     $consulta3= mysqli_query($conexion, $update);
+
+    $adeuda = "UPDATE usuarios SET adeuda='0' WHERE id_usuario='$userid'";
+    $consulta = mysqli_query($conexion, $adeuda);
 
 ?>
 	<script>
