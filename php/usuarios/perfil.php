@@ -13,7 +13,6 @@
     <?php 
      if (isset($_SESSION['usuario'])){
          }
-    echo $_GET['usid'];
     $otrouser= $_GET['usid'];
     ?>
     
