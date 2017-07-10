@@ -1,66 +1,23 @@
-<html>
-<?php
-	include("../menu.php");
-?>
-
-<head>
-  <meta charset="utf-8">
-  <title>FinElegir</title>
-  <link rel="stylesheet" href="/css/detalle.css">
-</head>
-<body>
-
 <?php
 	include('../conexion.php');
 	$posid= $_GET['po'];
     $gaid= $_GET['gau'];
 
-	$select= "SELECT * FROM gauchadas WHERE id_gauchada='$gaid'";
-	$resultado= mysqli_query($conexion, $select);
-	$gauchada= mysqli_fetch_array($resultado);
-	echo $gauchada['idpostulante'];
+    $consulta2 = "SELECT * FROM usuarios WHERE id_usuario='$posid'";
+    $resultado2= mysqli_query($conexion, $consulta2);
+	$postulantes= mysqli_fetch_array($resultado2);
+	$apellido= $postulantes['apellido'];
+    $nombre= ' '.$postulantes['nombre'];
+    $email= $postulantes['email'];
 
 
-    if(!isset($_GET['gau']) or !isset($_GET['po']) or $gauchada['idpostulante'] != 0 ){
-?> 
-    	<script>
-            window.location.href='/index.php';
-        </script> 
-<?php   
-	}
-	else {
+    echo "Se enviara un email a la direccion ".$email." para indicarle a ".$apellido." ".$nombre." que ah sido seleccionado para realizar la gauchada";
+
+
+	$selecpostu = "UPDATE gauchadas SET idpostulante='$posid' WHERE id_gauchada='$gaid'";
+	$consulta = mysqli_query($conexion, $selecpostu);
+	echo "</br>";
+	echo "</br>";
+	echo "</br>";
 ?>
-		<div id="finpostu">
-<?php
-	   		$consulta2 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario='$posid' AND P.idusuario=U.id_usuario";
-	    	$resultado2= mysqli_query($conexion, $consulta2);
-	    	$postulantes= mysqli_fetch_array($resultado2);
-	            echo "</br>";
-	            echo "A elegido a ";
-	            echo $postulantes['email'];
-	            echo " para realizar la gauchada";
-	            echo "</br>";
-            	echo "<hr/>";
-            	echo "Al acerlo rechazo a los siguientes usuarios:";
-            	echo "</br>";
-
-    			$consulta3 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario <> '$posid' AND P.idusuario=U.id_usuario";
-    			$resultado3= mysqli_query($conexion, $consulta3);
- 		        while($postulantes2= mysqli_fetch_array($resultado3)) {
-        		    echo $postulantes2['email'];
-        		}
-
-
-				$selecpostu = "UPDATE gauchadas SET idpostulante='$posid' WHERE id_gauchada='$gaid'";
-				$consulta = mysqli_query($conexion, $selecpostu);
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
-?>
-				<a href="javascript:window.close();">Listo</a> 
-		</div>
-<?php
-	}
-?>
-</body>
-</html>
+	<a href="javascript:window.close();">Listo</a> 

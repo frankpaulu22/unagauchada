@@ -1,6 +1,6 @@
 <html>
 <?php
-	include("../menu.php");
+    include("../menu.php");
 ?>
 
 <head>
@@ -14,66 +14,89 @@
     $gaid= $_GET['ga'];
     if(!isset($_SESSION['usuario']) or !isset($_GET['ga'])){
 ?> 
-    	<script>
+        <script>
             window.location.href='/index.php';
         </script> 
 <?php   
     }
+    $caducidad= date("Y-m-d");
     $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE id_gauchada='$gaid'";
     $resultado = mysqli_query($conexion, $consulta);
     $gauchada= mysqli_fetch_assoc($resultado);
     $consulta2 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario";
     $resultado2= mysqli_query($conexion, $consulta2);
+    
+    $consulta4 = "SELECT * FROM calificaciones WHERE idgauchada=$gaid";
+    $resultado4 = mysqli_query($conexion, $consulta4);
+    $calificado= mysqli_num_rows($resultado4);
     if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
-?>		<div id='gaupostulantes'>Postulantes:
+?>      <div id='gaupostulantes'>Postulantes:
 <?php
+        echo "<br>";
+        echo "<br>";
         while($postulantes= mysqli_fetch_array($resultado2)) {
-            echo "</br>";
             echo "<hr/>";
 ?>
-            <a target="_blank" href="" ><?php echo $postulantes['email']; ?></a>
-            <a target="_blank" onclick="return confirm('Esta seguro?')" href="/php/gauchada/elegirpostu.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Elegir</a>
+            <a target="_blank" href="/php/usuarios/perfil.php?usid=<?php echo $postulantes['id_usuario'];?>" ><?php echo $postulantes['apellido'];?> <?php echo $postulantes['nombre']; ?></a>
+            <?php
+            if($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
+            ?>
+                <a target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=400'); return false;" href="/php/gauchada/elegirpos.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Elegir</a>
+            <?php
+            }
+            else{
+                if($gauchada['idpostulante'] == $postulantes['id_usuario'] && $calificado == 0){
+            ?>
+                    <a target="_blank" onclick="return confirm(' Esta seguro?')" href="/php/gauchada/calificar.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Calificar</a>
+            <?php
+                }
+            }
+            ?>
 <?php
         }
 ?>
         </div>
 
+    <?php
+    
+    if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad && !$gauchada['borrada']){
+    ?>
         <div id='dueño'>
-            <a href="/php/gauchada/eliminar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Eliminar</a>
+            <a onclick="return confirm(' Esta seguro que desea eliminar la gauchada?')" href="/php/gauchada/eliminar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Eliminar Gauchada</a>
         </div>
-
+    
+    <?php
+    }
+    ?>
 <?php
     }
     else {
-?>      <div id='dueño'>
-            <a href="/php/gauchada/preguntar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Preguntar</a>
-<?php
+?>      
+    <?php if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
+
             $usuario= $_SESSION['usuario'];
-            $consulta3 = "SELECT COUNT(*) FROM postulantes WHERE idgauchada='$gaid' AND idusuario='$usuario'";
+            $consulta3 = "SELECT * FROM postulantes WHERE idgauchada='$gaid' AND idusuario='$usuario'";
             $resultado3= mysqli_query($conexion, $consulta3);
-            $postulado= mysqli_fetch_row($resultado3);
-            if($postulado[0] == 0) {
+            $postulado= mysqli_num_rows($resultado3);
+            if($postulado == 0){
 ?>
                 <form action='/php/gauchada/postularce.php' method='POST'>
                     <input type='hidden' name='userid' value="<?php echo $_SESSION['usuario'] ?>">
                     <input type='hidden' name='gauchadaid' value="<?php echo $gaid ?>">
-                    <input type='submit' value='Postularce'>
+                    <div id='postularse'><input type='submit' value='Postularse'></div>
                 </form>
 <?php
+                }
             }
-?>    
-        </div>
-<?php
     }
-
 ?>
     <div id='gautitulo'><?php echo $gauchada['titulo']; ?></div>
-    <div id='gauusuario'>De: <?php echo $gauchada['email']; ?></div>
+    <div id='gauusuario'>De: <?php echo $gauchada['apellido'];?> <?php echo $gauchada['nombre']; ?></div>
     <div id='gaucategoria'>Categoria: <?php echo $gauchada['categoria']; ?></div>
     <div id='gauciudad'>En: <?php echo $gauchada['ciudad']; ?></div>
     <div id='gaudescripcion'><?php echo $gauchada['descripcion']; ?></div>
     <div id="gauimagen">
-        <img height="240px" src="data:<?php echo $gauchada['extension']; ?>;base64,<?php echo base64_encode($gauchada['foto1']);?>"/>
+        <img height="240px" src="data:<?php echo $gauchada['extension1']; ?>;base64,<?php echo base64_encode($gauchada['foto1']);?>"/>
 <?php
         if(!empty($gauchada['foto2'])) {
 ?>
@@ -91,17 +114,63 @@
 <?php
         $listarpreguntas= "SELECT * FROM comentarios P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario ORDER BY id_comentario";
         $resulpreguntas= mysqli_query($conexion, $listarpreguntas);
-
+        
+        if ($_SESSION['usuario'] <> $gauchada['idusuario']){
+        ?>
+            <form action="/php/gauchada/enviarpregunta.php" method="POST" class="pregunta" >
+                <input type="hidden" name="usid" value="<?php echo $_SESSION['usuario']; ?>">
+                <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
+                <textarea class="textarea" MAXLENGTH="300" name='pregunta' placeholder="Escriba aqui su pregunta" required></textarea>
+                <input type="submit" name="Enviar">
+            </form>
+        <?php
+        }
         while ($pregun = mysqli_fetch_array($resulpreguntas)) {
 ?>
             <div id='pregunta'>
                 </br>
                 <hr />
-                <div id='pregusuario'>De: <?php echo $pregun['email']; ?></div>
+                <div id='pregusuario'>De: <?php echo $pregun['apellido'];?> <?php echo $pregun['nombre']; ?></div>
                 <div id='pregpregunta'><?php echo $pregun['pregunta']; echo "</br>"; echo "---"; echo $pregun['respuesta']; ?></div>
 <?php
                 if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
-?>                  <div id='responder'><a href="/php/gauchada/responder.php?comid=<?php echo $pregun['id_comentario']; ?>&gaid=<?php echo $gaid ?>" >Responder</a></div>
+                        ?> 
+                <?php if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
+                        $comid= $pregun['id_comentario'];
+
+                        $selecpregunta= "SELECT * FROM comentarios WHERE id_comentario='$comid'";
+                        $consulta= mysqli_query($conexion, $selecpregunta);
+                        $pregunta = mysqli_fetch_assoc($consulta);
+
+                    ?>  <div id='responder'>
+                        <?php if ($pregun['respuesta'] == ""){
+                             ?>   
+                                <form action="/php/gauchada/enviarrespuesta.php" method="POST" class="pregunta" >
+                                    <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
+                                    <input type="hidden" name="comid" value="<?php echo $comid; ?>">
+                                    <button type="button" onclick="respuesta.hidden = false">Responder</button>
+                                    <textarea class="textarea" MAXLENGTH="300" onclick="finish.hidden = false" hidden="hidden" name='respuesta' placeholder="Escriba aqui su respuesta*" required></textarea>
+                                    <button type="button" name="finish" hidden="hidden" onclick="this.form.submit()">Enviar</button>
+                                </form>
+                              <?php
+                              }
+                              else{
+                              ?>
+                                <form action="/php/gauchada/enviarrespuesta.php" method="POST" class="pregunta" >
+                                    <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
+                                    <input type="hidden" name="comid" value="<?php echo $comid; ?>">
+                                    <button type="button" onclick="respuesta.hidden = false">Editar</button>
+                                    <textarea class="textarea" MAXLENGTH="300" onclick="finish.hidden = false"  hidden="hidden" name='respuesta' ><?php echo $pregun['respuesta']; ?></textarea>
+                                    <button type="button" name="finish" hidden="hidden" onclick="this.form.submit()">Enviar</button>
+                                </form>
+
+                              <?php  
+                              }  
+                              ?>
+                        </div>
+                <?php
+                    }
+                ?>
 <?php
                 }
 ?>
@@ -109,7 +178,6 @@
             <br>
 <?php     
         }
-
 ?>
 
 

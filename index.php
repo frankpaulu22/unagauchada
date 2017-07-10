@@ -29,6 +29,13 @@
                 else{
                     $filciudad="";
                 }
+                if(isset($_POST['provincia'])){
+                    $filprov= $_POST['provincia'];
+                    $filprovincia=" AND Ci.idprovincia=$filprov";
+                } 
+                else{
+                    $filprovincia="";
+                }
                 if(isset($_POST['categoria'])){
                     $filcat= $_POST['categoria'];
                     $filcategoria=" AND C.id_categoria=$filcat";
@@ -37,7 +44,7 @@
                     $filcategoria="";
                 }
 
-                $filtrado= $filciudad.$filcategoria.$filtitulo;
+                $filtrado= $filprovincia.$filciudad.$filcategoria.$filtitulo;
 
             }
             else {
@@ -45,13 +52,13 @@
             }
 
 
-            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion > '$caducidad' AND G.borrada = 0 AND G.idpostulante = 0 $filtrado ORDER BY cantpostulantes, id_gauchada DESC";
+            $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE G.expiracion >= '$caducidad' AND G.borrada = 0 AND G.idpostulante = 0 $filtrado ORDER BY cantpostulantes, id_gauchada DESC";
             $resultado = mysqli_query($conexion, $consulta);
 
 ?>
             <div id="filtro">
                 <form action='/index.php' method='POST' enctype="multipart/form-data">
-                    <select name="categoria" id="categoria" value="">
+                    <select name="categoria" id="categoria" value="" onchange="this.form.submit()">
                         <?php
                             $consulcate = 'SELECT * FROM categorias';
                             $rescate = mysqli_query($conexion, $consulcate);
@@ -80,19 +87,60 @@
                         ?>       
                     </select>
 
-                    <select name="ciudad" id="ciudad" value="">
+                    <select name="provincia" id="provincia" value="" onchange="this.form.submit()">
                         <?php
-                            $consulciu = 'SELECT * FROM ciudades';
+                            $consulprov = 'SELECT * FROM provincias';
+                            $resprov = mysqli_query($conexion, $consulprov);
+                        ?>
+<?php 
+                            if(isset($_POST['provincia'])) {
+                                $valorprov = "SELECT * FROM provincias WHERE id_provincia= '$filprov'";
+                                $resvalorprov = mysqli_query($conexion, $valorprov);
+                                $mostrarprov = mysqli_fetch_array($resvalorprov);
+?> 
+                                <option selected hidden value="<?php echo $mostrarprov[0]; ?>"><?php echo $mostrarprov[1]; ?> </option>
+<?php
+                            }
+                            else {
+?> 
+                                <option disabled selected hidden value="">Provincia</option>
+<?php
+                            }
+
+                        while ($arrprov = mysqli_fetch_array($resprov)){
+                        ?>
+                        <option value=" <?php echo $arrprov['id_provincia'] ?> " >
+                        <?php echo $arrprov['provincia']; ?>
+                        </option>
+
+                        <?php
+                        }    
+                        ?>       
+                    </select>
+
+                    <select name="ciudad" id="ciudad" value="" onchange="this.form.submit()">
+                        <?php
+                            $idprovi= $_POST['provincia'];
+                            $consulciu = "SELECT * FROM ciudades WHERE idprovincia= '$idprovi'";
                             $resciu = mysqli_query($conexion, $consulciu);
                         ?>
 <?php 
                             if(isset($_POST['ciudad'])) {
-                                $valorciu = "SELECT * FROM ciudades WHERE id_ciudad= '$filciu'";
+                                $valorciu = "SELECT * FROM ciudades WHERE id_ciudad= '$filciu' AND idprovincia= '$idprovi'";
                                 $resvalorciu = mysqli_query($conexion, $valorciu);
+                                $cantitate= mysqli_num_rows($resvalorciu);
                                 $mostrarciu = mysqli_fetch_array($resvalorciu);
-?> 
-                                <option selected hidden value="<?php echo $mostrarciu[0]; ?>"><?php echo $mostrarciu[2]; ?> </option>
-<?php
+
+                                if($cantitate < 1){
+                                    ?>
+                                    <option selected hidden value="<?php echo $_POST['ciudad']; ?>">Ciudad</option>
+                                    <?php
+                                }
+                                else {
+                                    ?>
+                                    <option selected hidden value="<?php echo $mostrarciu[0]; ?>"><?php echo $mostrarciu[2]; ?> </option>
+                                    <?php
+                                }
                             }
                             else {
 ?> 

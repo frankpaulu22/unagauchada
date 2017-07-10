@@ -2,8 +2,9 @@
 	include("../conexion.php");
 	$respuesta= $_POST['respuesta'];
 	$gauid= $_POST['gaid'];
+    $coid= $_POST['comid'];
 
-	$insertar= "UPDATE comentarios SET respuesta= '$respuesta'";
+	$insertar= "UPDATE comentarios c SET respuesta= '$respuesta' WHERE c.id_comentario = $coid";
 	$consulta= mysqli_query($conexion, $insertar);
 
 ?>

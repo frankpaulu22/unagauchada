@@ -9,7 +9,7 @@
     $resultado = mysqli_query($conexion, $consulta);
     $gauchada= mysqli_fetch_array($resultado);
 
-    if($gauchada['cantpostulantes'] != 0 or $gauchada['expiracion'] < $caducidad) {
+    if($gauchada['idpostulante'] != 0 or $gauchada['expiracion'] < $caducidad) {
 ?>   
 	    <script>
 	        alert('No puede eliminar esta gauchada');

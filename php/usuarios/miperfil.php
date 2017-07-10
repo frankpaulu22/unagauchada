@@ -28,7 +28,10 @@
     $resultado2= mysqli_query($conexion, $comentarios);
     
     $usuario = mysqli_fetch_assoc($resultado);
-    
+    $puntos= $usuario['puntos'];
+    $ranks = "SELECT * FROM rangos  WHERE max >='$puntos' AND min <= '$puntos' ";
+    $resultado3= mysqli_query($conexion, $ranks);
+    $rango = mysqli_fetch_assoc($resultado3);
     
     ?>
     
@@ -40,7 +43,7 @@
         <div id='ptelefono'>Telefono:<?php echo $usuario['telefono']; ?></div>
         <div id='pcreditos'>Creditos:<?php echo $usuario['creditos']; ?></div>
         <div id='pemail'>Email:<?php echo $usuario['email']; ?></div>
-        <div id='ppuntos'>Puntos:<?php echo $usuario['puntos']; ?></div>
+        <div id='ppuntos'>Rango:<?php echo $rango['nombre']; ?></div>
     </div>
         
     
@@ -49,7 +52,7 @@
     <?php
         while($gauchada= mysqli_fetch_array($resultado1)) {
             ?>
-            <div id='gau'><a href="php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>"><?php echo $gauchada['titulo']?></a></div>
+            <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>"><?php echo $gauchada['titulo']?></a></div>
             
         
     <?php
@@ -65,7 +68,7 @@
     <?php
         while($comentario= mysqli_fetch_array($resultado2)) {
             ?>
-            <div id='gau'><a href="php/gauchada/detalle.php?ga=<?php echo $comentario['idgauchada']; ?>"><?php echo $comentario['pregunta'];?></a></div>
+            <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $comentario['idgauchada']; ?>"><?php echo $comentario['pregunta'];?></a></div>
             
         
     <?php
@@ -74,7 +77,7 @@
     </div>
     </div>
     
-    <div id='Modificar'><a href="php/usuarios/modificar.php?usid=<?php echo $_SESSION['usuario']; ?>" >Modificar perfil</a></div>
+    <div id='Modificar'><a href="/php/usuarios/modificar.php?usid=<?php echo $_SESSION['usuario']; ?>" >Modificar perfil</a></div>
         
 </body>
 </html>
