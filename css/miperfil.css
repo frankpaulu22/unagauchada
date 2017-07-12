@@ -1,90 +1,126 @@
+#all{
+}
+
+#modificar {
+    position: absolute;
+	top: 0%;
+    left: 60%;
+	font-size: 22px;
+    width: 200;
+}
+
 #perfil {
-	position: absolute;
-	top: 50%;
-	left: 30%;
+	position:relative;
+	top: 60%;
+	left: 10%;
 	font-size: 45px;
 }
 
     #foto {
-	position: absolute;
+	position: relative;
     left: 0px;
     z-index: 10;
 }
 
     #pnombre {
-	position: absolute;
-	top: 300px;
+	position: relative;
 	font-size: 22px;
 }
 
     #papellido {
-	position: absolute;
-	top: 325px;
+	position: relative;
 	font-size: 22px;
 }
 
     #ptelefono {
-	position: absolute;
-	top: 350px;
+	position: relative;
 	font-size: 22px;
 }
 
     #pemail {
-	position: absolute;
-	top: 375px;
+	position: relative;
 	font-size: 22px;
     
 }
 
     #pcreditos {
-	position: absolute;
-	top: 450px;
+	position: relative;
 	font-size: 22px;
+    width:200;
 }
 
     #pnacimiento {
-	position: absolute;
-	top: 400px;
+	position: relative;
 	font-size: 22px;
     width: 200;
 }
 
     #ppuntos {
-	position: absolute;
-	top: 425px;
+	position: relative;
 	font-size: 22px;
     width: 200;
 }
 
-#modificar {
-	position: absolute;
-	top: 50%;
-    right: 0%;
+
+    #preputacion {
+	position: relative;
 	font-size: 22px;
+    width: 250;
 }
 
 #comentarios {
-	position: absolute;
-	top: 190%;
-	left: 30%;
+	position: relative;
+	left: 10%;
 	font-size: 45px;
+    width: 450;
 }
 
-    #comentario {
-	position: absolute;
+    #com {
+	position: relative;
 	top: 90%;
 	font-size: 22px;
 }
 
 #gauchadas {
-	position: absolute;
-	top: 130%;
-	left: 30%;
+	position: relative;
+	left: 10%;
 	font-size: 45px;
 }
 
-    #gauchada {
-	position: absolute;
-	top: 110%;
+    #gau {
+	position: relative;
 	font-size: 22px;
+    text-decoration: none;
+    float: left;
+    width: 680;
+}
+
+    #estadoB {
+	font-size: 22px;
+    color:crimson;
+}
+
+    #estadoV {
+	font-size: 22px;
+    color:crimson;
+}
+
+    #estadoS {
+	font-size: 22px;
+    color:limegreen;
+}
+
+    #estadoC {
+	font-size: 22px;
+    color:limegreen;
+}
+
+    #estadoN {
+	font-size: 22px;
+    color:darkorange;
+}
+
+    #estadoCA {
+	font-size: 22px;
+    color:cornflowerblue;
 }
