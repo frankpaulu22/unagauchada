@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/css/miperfil.css">
 </head>
 <body>
-    
+    <div id='perfil'>
     <?php 
      if (isset($_SESSION['usuario'])){
     ?>
@@ -43,7 +43,8 @@
         <div id='ptelefono'>Telefono:<?php echo $usuario['telefono']; ?></div>
         <div id='pcreditos'>Creditos:<?php echo $usuario['creditos']; ?></div>
         <div id='pemail'>Email:<?php echo $usuario['email']; ?></div>
-        <div id='ppuntos'>Rango:<?php echo $rango['nombre']; ?></div>
+        <div id='ppuntos'>Puntos:<?php echo $usuario['puntos']; ?></div>
+        <div id='preputacion'>Reputacion:<?php echo $rango['nombre']; ?></div>
     </div>
         
     
@@ -51,13 +52,85 @@
     <div id='gauchada'>
     <?php
         while($gauchada= mysqli_fetch_array($resultado1)) {
-            ?>
-            <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>"><?php echo $gauchada['titulo']?></a></div>
             
-        
-    <?php
+            $comentarios2 = "SELECT * FROM comentarios  WHERE idgauchada='$gauchada[id_gauchada] '";
+            
+            $resultado4 = mysqli_query($conexion, $comentarios2);
+            
+            $comen = mysqli_num_rows($resultado4);
+            
+            if($gauchada['borrada']==1){
+            ?>
+                <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
+                
+                <div id='estadoB'>Borrada</div>
+            <?php
+            }
+            else{
+                
+                if($gauchada['expiracion']< date("Y-m-d")){
+                ?>
+                    <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
+                        
+                        
+                    <div id='estadoV'>Vencida</div>
+                    
+
+                    
+                <?php
+                }
+                else{
+                    
+                    if($gauchada['cantpostulantes']==0){
+                    ?>
+                        <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
+                        
+                        <div id='estadoS'>Sin postulantes</div>
+
+                        
+                    <?php
+                    }
+                    else{
+                        
+                        if($gauchada['idpostulante'] == 0){
+                        ?>
+                            <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
+
+                            <div id='estadoC'>Con postulantes</div>
+                        <?php
+                        }
+                        else{
+                        
+                            if($comen != 0){
+                            ?>
+                                <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
+
+                                <div id='estadoN'>Adeuda calificacion</div>
+                            <?php
+                            }
+                            else{
+                            ?>
+                                <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
+
+                                <div id='estadoCA'>Calificado</div>
+                            <?php
+                            }
+                            ?>
+                        <?php
+                        }
+                        ?>
+                    <?php
+                    }
+                    ?>
+                <?php
+                }
+                ?>
+            <?php
+            }
+            ?>    
+        <?php
         }
-    ?>    
+        ?> 
     </div>
     </div>
     
@@ -67,17 +140,31 @@
     <div id='comentario'>
     <?php
         while($comentario= mysqli_fetch_array($resultado2)) {
-            ?>
-            <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $comentario['idgauchada']; ?>"><?php echo $comentario['pregunta'];?></a></div>
             
-        
+            $gauchada2 = "SELECT * FROM gauchadas  WHERE id_gauchada='$comentario[idgauchada] '";
+            
+            $resultado3 = mysqli_query($conexion, $gauchada2);
+            
+            $gauch = mysqli_fetch_assoc($resultado3);
+            
+            if($gauch['borrada']==1){?>
+                <div id='com'><a><?php echo $comentario['pregunta'];?></a></div>
+            <?php
+            }
+            else{
+            ?>
+                <div id='com'><a href="/php/gauchada/detalle.php?ga=<?php echo $comentario['idgauchada']; ?>" style="text-decoration:none;"><?php echo $comentario['pregunta'];?></a></div>
+            <?php
+            }
+            ?>
     <?php
         }
     ?>    
     </div>
     </div>
     
-    <div id='Modificar'><a href="/php/usuarios/modificar.php?usid=<?php echo $_SESSION['usuario']; ?>" >Modificar perfil</a></div>
+    <div id='Modificar'><a href="/php/usuarios/modificar.php?usid=<?php echo $_SESSION['usuario']; ?>" style="text-decoration:none;" >Modificar perfil</a></div>
+        </div>
         
 </body>
 </html>
