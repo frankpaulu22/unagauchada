@@ -174,7 +174,10 @@
 
             <div id='listado'>
             <?php
-
+            $contar = mysqli_num_rows($resultado);
+            if($contar == 0) {
+                echo "<h1>No se encontraron gauchadas con esas caracteristicas</h1>";
+            }
             while ($lista = mysqli_fetch_array($resultado)) {
                 ?>
                 <div id='elemento'>
@@ -184,7 +187,7 @@
                     <div id='eledescripcion'><?php echo $lista['descripcion']; ?></div>
                     <div id="eleimagen"><img height="240px" src="data:<?php echo $lista['extension']; ?>;base64,<?php echo base64_encode($lista['foto1']); ?>"/></div><?php
                     if (isset($_SESSION['estado']) && $_SESSION['estado']== 'logeado'){
-                        ?><div id='eledetalle'><a href="php/gauchada/detalle.php?ga=<?php echo $lista['id_gauchada']; ?>" >Detalle</a></div><?php
+                            ?><div id='eledetalle'><a href="php/gauchada/detalle.php?ga=<?php echo $lista['id_gauchada']; ?>" >Detalle</a></div><?php
                     }
                 ?>
                 </div>
