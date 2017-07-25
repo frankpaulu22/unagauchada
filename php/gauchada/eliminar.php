@@ -22,10 +22,12 @@
     	$restar= '1';
 		$update= "UPDATE gauchadas SET borrada= 1 WHERE id_gauchada='$gauid'";
 		$consulta= mysqli_query($conexion, $update);
-
-		$update2 = "UPDATE usuarios SET creditos=creditos + '$restar' WHERE id_usuario=$usid";
-		$updcreditos2 = mysqli_query($conexion, $update2) or die ('Problemas en la consulta'. mysql_error());
-
+        
+        if($gauchada['cantpostulantes'] == 0 ) {
+            
+            $update2 = "UPDATE usuarios SET creditos=creditos + '$restar' WHERE id_usuario=$usid";
+            $updcreditos2 = mysqli_query($conexion, $update2) or die ('Problemas en la consulta'. mysql_error());
+        }
 ?>
 	    <script>
 	        alert('Se elimino la gauchada');

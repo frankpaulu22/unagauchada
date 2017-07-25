@@ -79,7 +79,7 @@
             $resultado3= mysqli_query($conexion, $consulta3);
             $postulado= mysqli_num_rows($resultado3);
             if($postulado == 0){
-?>
+            ?>
                 <form action='/php/gauchada/postularce.php' method='POST'>
                     <input type='hidden' name='userid' value="<?php echo $_SESSION['usuario'] ?>">
                     <input type='hidden' name='gauchadaid' value="<?php echo $gaid ?>">
@@ -87,7 +87,16 @@
                 </form>
 <?php
                 }
+            else{
+                ?>
+                <form action='/php/gauchada/despostularce.php' method='POST'>
+                    <input type='hidden' name='userid' value="<?php echo $_SESSION['usuario'] ?>">
+                    <input type='hidden' name='gauchadaid' value="<?php echo $gaid ?>">
+                    <div id='postularse'><input type='submit' value='Despostularse'></div>
+                </form>
+                <?php
             }
+        }
     }
 ?>
     <div id='gautitulo'><?php echo $gauchada['titulo']; ?></div>
@@ -133,6 +142,19 @@
                 <div id='pregusuario'>De: <?php echo $pregun['apellido'];?> <?php echo $pregun['nombre']; ?></div>
                 <div id='pregpregunta'><?php echo $pregun['pregunta']; echo "</br>"; echo "---"; echo $pregun['respuesta']; ?></div>
 <?php
+                
+                if ((isset($_SESSION['usuario']) && $_SESSION['usuario']== $pregun['id_usuario'])AND $pregun['respuesta']==""){
+                    
+                    ?>
+                    <form action="/php/gauchada/eliminarpregunta.php" method="POST" class="repregunta" >
+                        <input type="hidden" name="coment" value="<?php echo $pregun['id_comentario']; ?>">
+                        <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
+                        <input type="submit" name="eliminar" value="Eliminar">
+                    </form>
+                <?php
+                    
+                }
+                                                               
                 if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
                         ?> 
                 <?php if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
