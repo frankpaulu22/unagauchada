@@ -59,6 +59,12 @@
             
             $comen = mysqli_num_rows($resultado4);
             
+            $calis = "SELECT * FROM calificaciones  WHERE idgauchada='$gauchada[id_gauchada] '";
+            
+            $resultado5 = mysqli_query($conexion, $calis);
+            
+            $cali = mysqli_num_rows($resultado5);
+            
             if($gauchada['borrada']==1){
             ?>
                 <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
@@ -101,7 +107,7 @@
                         }
                         else{
                         
-                            if($comen != 0){
+                            if($cali == 0){
                             ?>
                                 <div id='gau'><a href="/php/gauchada/detalle.php?ga=<?php echo $gauchada['id_gauchada']; ?>" style="text-decoration:none;"><?php echo $gauchada['titulo']?></a></div>
 
