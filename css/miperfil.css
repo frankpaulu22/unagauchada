@@ -68,8 +68,74 @@
     width: 250;
 }
 
-#comentarios {
+#gauchadas {
 	position: relative;
+	left: 10%;
+	font-size: 45px;
+    width: 550;
+    resize:vertical;
+}
+    
+    #nohay {
+	position: relative;
+	font-size: 22px;
+    text-decoration: none;
+    text-align: left;
+    width: 680;
+}
+        
+    #gau {
+	position: relative;
+	font-size: 22px;
+    text-decoration: none;
+    text-align: left;
+    width: 680;
+}
+
+    #estadoB {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:crimson;
+}
+
+    #estadoV {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:crimson;
+}
+
+    #estadoS {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:limegreen;
+}
+
+    #estadoC {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:limegreen;
+}
+
+    #estadoN {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:darkorange;
+}
+
+    #estadoCA {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:cornflowerblue;
+}
+
+#comentarios {
+	position:relative;
 	left: 10%;
 	font-size: 45px;
     width: 450;
@@ -81,46 +147,37 @@
 	font-size: 22px;
 }
 
-#gauchadas {
+#postulaciones {
 	position: relative;
 	left: 10%;
 	font-size: 45px;
+    width: 450;
 }
-
-    #gau {
+    #pos {
 	position: relative;
 	font-size: 22px;
     text-decoration: none;
-    float: left;
+    text-align: left;
     width: 680;
 }
 
-    #estadoB {
-	font-size: 22px;
-    color:crimson;
-}
-
-    #estadoV {
-	font-size: 22px;
-    color:crimson;
-}
-
-    #estadoS {
-	font-size: 22px;
-    color:limegreen;
-}
-
-    #estadoC {
-	font-size: 22px;
-    color:limegreen;
-}
-
-    #estadoN {
-	font-size: 22px;
-    color:darkorange;
-}
-
-    #estadoCA {
+    #estadoE {
+    display:inline;
+    float: right;
 	font-size: 22px;
     color:cornflowerblue;
+}
+
+    #estadoR {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:crimson;
+}
+
+    #estadoP {
+    display:inline;
+    float: right;
+	font-size: 22px;
+    color:limegreen;
 }

@@ -44,6 +44,22 @@
 	font-size: 45px;
 }
 
+    #nohay {
+	position: relative;
+	font-size: 22px;
+    text-decoration: none;
+    float: left;
+    width: 680;
+}
+
+    #tit {
+	position: relative;
+	top: 0;
+	font-size: 26px;
+    float: left;
+    width: 680;
+}
+
     #calificacion {
 	position: absolute;
 	top: 110%;
