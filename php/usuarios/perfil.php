@@ -42,12 +42,26 @@
         <div id='ppuntos'>Rango:<?php echo $rango['nombre']; ?></div>
     </div>
     
-    <div id='calificaciones'>Calificaciones:
+    <div id='calificaciones'>Gauchadas realizadas:
         <div id='calificacion'>
             <?php
+            $contar = mysqli_num_rows($resultado1);
+            if($contar == 0) {
+                ?>
+                <div id='nohay'><?php echo "Este usuario no realizo gauchadas por el momento";?></div>
+                <?php
+            }
             while($calificacion= mysqli_fetch_array($resultado1)) {
                 
+            $ga = "SELECT * FROM gauchadas  WHERE id_gauchada='$calificacion[idgauchada] '";
+            $resultado4= mysqli_query($conexion, $ga);
+            $gau= mysqli_fetch_assoc($resultado4);
+            
             echo "<hr/>";
+            ?>
+            <div id='tit'><?php echo 'Gauchada: '.$gau['titulo'];
+            echo "<hr/>";?></div>
+            <?php
             echo 'Calificacion: '.$calificacion['puntaje'];
             echo "<br/>";
             echo "Comentario:";
