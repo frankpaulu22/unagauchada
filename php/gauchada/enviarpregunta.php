@@ -10,5 +10,5 @@
 ?>
 	<script>
 		alert('Su pregunta a sido publicada');
-		window.location.href='/php/gauchada/detalle.php?ga=<?php echo $gauid; ?>';
+		window.location.href='/php/gauchada/detalle.php?ga=<?php echo $gauid; ?>&preg=';
 	</script>

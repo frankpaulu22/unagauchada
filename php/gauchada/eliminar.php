@@ -13,7 +13,7 @@
 ?>   
 	    <script>
 	        alert('No puede eliminar esta gauchada');
-	        window.location.href='/php/gauchada/detalle.php?ga=<?php echo $gauid; ?>';
+	        window.location.href='/php/gauchada/detalle.php?ga=<?php echo $gauid; ?>&preg=';
 	    </script>
 <?php
     }

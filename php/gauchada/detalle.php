@@ -129,7 +129,7 @@
             <form action="/php/gauchada/enviarpregunta.php" method="POST" class="pregunta" >
                 <input type="hidden" name="usid" value="<?php echo $_SESSION['usuario']; ?>">
                 <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
-                <textarea class="textarea" MAXLENGTH="300" name='pregunta' placeholder="Escriba aqui su pregunta" required></textarea>
+                <textarea class="textarea" MAXLENGTH="300" name='pregunta' placeholder="Escriba aqui su pregunta*" required><?php if($_GET['preg']!=""){ echo $_GET['preg']; }?></textarea>
                 <input type="submit" name="Enviar">
             </form>
         <?php
@@ -152,7 +152,19 @@
                         <input type="submit" name="eliminar" value="Eliminar">
                     </form>
                 <?php
+                    if ($pregun['respuesta']== ""){
+                    ?>    
                     
+                    <form action="/php/gauchada/modificarpregunta.php" method="POST" class="repregunta" >
+                        <input type="hidden" name="coment" value="<?php echo $pregun['id_comentario']; ?>">
+                        <input type="hidden" name="pregun" value="<?php echo $pregun['pregunta']; ?>">
+                        <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
+                        <input type="submit" name="Modificar" value="Modificar">
+                    </form>
+        
+
+                    <?php
+                    }
                 }
                                                                
                 if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
@@ -166,12 +178,13 @@
 
                     ?>  <div id='responder'>
                         <?php if ($pregun['respuesta'] == ""){
+                           
                              ?>   
                                 <form action="/php/gauchada/enviarrespuesta.php" method="POST" class="pregunta" >
                                     <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
                                     <input type="hidden" name="comid" value="<?php echo $comid; ?>">
                                     <button type="button" onclick="respuesta.hidden = false">Responder</button>
-                                    <textarea class="textarea" MAXLENGTH="300" onclick="finish.hidden = false" hidden="hidden" name='respuesta' placeholder="Escriba aqui su respuesta*" required></textarea>
+                                    <textarea class="textarea" MAXLENGTH="300" onclick="finish.hidden = false" hidden="hidden" name='respuesta' placeholder="Escriba aqui su respuesta" required></textarea>
                                     <button type="button" name="finish" hidden="hidden" onclick="this.form.submit()">Enviar</button>
                                 </form>
                               <?php
