@@ -32,4 +32,9 @@
 	echo "</br>";
 	echo "</br>";
 ?>
+
+    <script>
+        window.opener.location.reload();
+    </script>
+
 	<a href="javascript:window.close();">Listo</a> 

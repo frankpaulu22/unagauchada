@@ -34,6 +34,6 @@
 ?>
 	<script>
 		alert('El usuario ah sido calificado');
+        window.opener.location.reload();
 		window.close();
-        window.location.reload();
 	</script>

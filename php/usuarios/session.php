@@ -3,35 +3,52 @@
     	include('../conexion.php');
     	$usuario=$_POST['usuario'];
     	$clave=$_POST['clave'];
-    	$consulta = "SELECT * FROM usuarios WHERE email='$usuario' AND clave='$clave'";
-    	$registro = mysqli_query($conexion, $consulta);
+        $consulta1 = "SELECT * FROM admins WHERE email='$usuario' AND clave='$clave'";
+        $registro1 = mysqli_query($conexion, $consulta1);
 
-        if (!$usr=mysqli_fetch_array($registro)){  
-?>
-            <script>
-                alert('Usuario y/o clave incorrectos');
-                window.location.href='/php/usuarios/iniciar.php';
-            </script>
-<?php
-        }
-        else if($usr['baneado'] == 1) {
-?>
-            <script>
-                alert('Usuario baneado');
-                window.location.href='/index.php';
-            </script>
-<?php   }
-        else {
+        if ($admin=mysqli_fetch_array($registro1)){
             session_start();
             $_SESSION['estado'] = 'logeado';
-            $_SESSION['usuario'] = $usr['id_usuario'];
-
-?>
+            $_SESSION['admin'] = $admin['id_admin'];
+        ?>
             <script>
-                alert('Usuario logeado');
+                alert('Admin logeado');
                 window.location.href='/index.php';
             </script>
-<?php   }
+        <?php
+        }
+        else{
+
+        	$consulta = "SELECT * FROM usuarios WHERE email='$usuario' AND clave='$clave'";
+        	$registro = mysqli_query($conexion, $consulta);
+
+            if (!$usr=mysqli_fetch_array($registro)){  
+    ?>
+                <script>
+                    alert('Usuario y/o clave incorrectos');
+                    window.location.href='/php/usuarios/iniciar.php';
+                </script>
+    <?php
+            }
+            else if($usr['baneado'] == 1) {
+    ?>
+                <script>
+                    alert('Usuario baneado');
+                    window.location.href='/index.php';
+                </script>
+    <?php   }
+            else {
+                session_start();
+                $_SESSION['estado'] = 'logeado';
+                $_SESSION['usuario'] = $usr['id_usuario'];
+
+    ?>
+                <script>
+                    alert('Usuario logeado');
+                    window.location.href='/index.php';
+                </script>
+    <?php   }
+        }
     }
     else {
 ?> 

@@ -48,3 +48,29 @@ function calcularcreditos() {
     }
     
 }
+
+function puntuacion() {
+
+    var puninicial, punfinal;
+
+    puninicial = document.getElementById('puninicial');
+    punfinal = document.getElementById('punfinal');
+
+    if(puninicial.value > punfinal.value){
+        alert('La puntuacion final no puede ser menor a la inicial');
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+function restarFechas(fecha1, fecha2) {
+    var fech1 = document.getElementById(fecha1).value;
+    var fech2 = document.getElementById(fecha2).value;
+
+if((Date.parse(fech1)) > (Date.parse(fech2))){
+    alert('La fecha inicial no puede ser mayor que la fecha final');
+    return false;
+}
+}

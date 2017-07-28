@@ -13,11 +13,13 @@
 <?php
     $gaid= $_GET['ga'];
     if(!isset($_SESSION['usuario']) or !isset($_GET['ga'])){
+        if(!isset($_SESSION['admin'])){
 ?> 
-        <script>
-            window.location.href='/index.php';
-        </script> 
+            <script>
+                window.location.href='/index.php';
+            </script> 
 <?php   
+        }
     }
     $caducidad= date("Y-m-d");
     $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE id_gauchada='$gaid'";
@@ -29,7 +31,7 @@
     $consulta4 = "SELECT * FROM calificaciones WHERE idgauchada=$gaid";
     $resultado4 = mysqli_query($conexion, $consulta4);
     $calificado= mysqli_num_rows($resultado4);
-    if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){
+    if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario'] Xor isset($_SESSION['admin'])){
 ?>      <div id='gaupostulantes'>Postulantes:
 <?php
         echo "<br>";
@@ -39,13 +41,13 @@
 ?>
             <a target="_blank" href="/php/usuarios/perfil.php?usid=<?php echo $postulantes['id_usuario'];?>" ><?php echo $postulantes['apellido'];?> <?php echo $postulantes['nombre']; ?></a>
             <?php
-            if($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
+            if($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad && !isset($_SESSION['admin'])){
             ?>
                 <a target="_blank" onClick="window.open(this.href, this.target, 'width=500,height=400'); return false;" href="/php/gauchada/elegirpos.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Elegir</a>
             <?php
             }
             else{
-                if($gauchada['idpostulante'] == $postulantes['id_usuario'] && $calificado == 0){
+                if($gauchada['idpostulante'] == $postulantes['id_usuario'] && $calificado == 0 && !isset($_SESSION['admin'])){
             ?>
                     <a target="_blank" onclick="return confirm(' Esta seguro?')" href="/php/gauchada/calificar.php?po=<?php echo $postulantes['id_usuario']; ?>&gau=<?php echo $gaid; ?>">Calificar</a>
             <?php
@@ -57,22 +59,34 @@
 ?>
         </div>
 
-    <?php
-    
-    if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad && !$gauchada['borrada']){
-    ?>
-        <div id='dueño'>
-            <a onclick="return confirm(' Esta seguro que desea eliminar la gauchada?')" href="/php/gauchada/eliminar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Eliminar Gauchada</a>
-        </div>
-    
-    <?php
-    }
-    ?>
+<?php
+        
+        if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad && !$gauchada['borrada'] && !isset($_SESSION['admin'])){
+?>
+            <div id='dueño'>
+                <a onclick="return confirm(' Esta seguro que desea despublicar la gauchada?')" href="/php/gauchada/eliminar.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Despublicar Gauchada</a>
+                </br>
+                <a href="/php/gauchada/modificargauchada.php?usid=<?php echo $_SESSION['usuario'] ?>&gaid=<?php echo $gaid ?>" >Modificar Gauchada</a>
+            </div>
+        
+<?php
+        }
+        if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad && !$gauchada['borrada'] && isset($_SESSION['admin'])){
+?>
+            <div id='dueño'>
+                <a onclick="return confirm(' Esta seguro que desea eliminar la gauchada?')" href="/php/admins/bajagauchada.php?usid=<?php echo $gauchada['idusuario'] ?>&gaid=<?php echo $gaid ?>" >Eliminar Gauchada</a>
+            </div>
+        
+<?php
+        }
+
+
+?>
 <?php
     }
     else {
 ?>      
-    <?php if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad){
+    <?php if ($gauchada['idpostulante'] == 0 && $gauchada['expiracion'] > $caducidad && !isset($_SESSION['admin'])){
 
             $usuario= $_SESSION['usuario'];
             $consulta3 = "SELECT * FROM postulantes WHERE idgauchada='$gaid' AND idusuario='$usuario'";
@@ -124,7 +138,7 @@
         $listarpreguntas= "SELECT * FROM comentarios P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario ORDER BY id_comentario";
         $resulpreguntas= mysqli_query($conexion, $listarpreguntas);
         
-        if ($_SESSION['usuario'] <> $gauchada['idusuario']){
+        if (isset($_SESSION['usuario']) && $_SESSION['usuario'] <> $gauchada['idusuario']){
         ?>
             <form action="/php/gauchada/enviarpregunta.php" method="POST" class="pregunta" >
                 <input type="hidden" name="usid" value="<?php echo $_SESSION['usuario']; ?>">
@@ -143,17 +157,16 @@
                 <div id='pregpregunta'><?php echo $pregun['pregunta']; echo "</br>"; echo "---"; echo $pregun['respuesta']; ?></div>
 <?php
                 
-                if ((isset($_SESSION['usuario']) && $_SESSION['usuario']== $pregun['id_usuario'])AND $pregun['respuesta']==""){
-                    
-                    ?>
+                if ((isset($_SESSION['usuario']) && $_SESSION['usuario']== $pregun['id_usuario'])){
+                
+                    if ($pregun['respuesta']== ""){
+                    ?>  
+
                     <form action="/php/gauchada/eliminarpregunta.php" method="POST" class="repregunta" >
                         <input type="hidden" name="coment" value="<?php echo $pregun['id_comentario']; ?>">
                         <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
                         <input type="submit" name="eliminar" value="Eliminar">
-                    </form>
-                <?php
-                    if ($pregun['respuesta']== ""){
-                    ?>    
+                    </form>  
                     
                     <form action="/php/gauchada/modificarpregunta.php" method="POST" class="repregunta" >
                         <input type="hidden" name="coment" value="<?php echo $pregun['id_comentario']; ?>">
@@ -165,6 +178,16 @@
 
                     <?php
                     }
+                }
+                else if(isset($_SESSION['admin'])){
+                ?>  
+
+                    <form action="/php/gauchada/eliminarpregunta.php" method="POST" class="repregunta" >
+                        <input type="hidden" name="coment" value="<?php echo $pregun['id_comentario']; ?>">
+                        <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
+                        <input type="submit" name="eliminar" value="Eliminar">
+                    </form> 
+                <?php
                 }
                                                                
                 if (isset($_SESSION['usuario']) && $_SESSION['usuario']== $gauchada['idusuario']){

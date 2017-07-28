@@ -10,7 +10,7 @@
             include("php/menu.php"); 
             $caducidad= date("Y-m-d");
             
-            if ( isset($_SESSION['estado']) && $_SESSION['estado'] == 'logeado'){
+            if ( isset($_SESSION['estado']) && $_SESSION['estado'] == 'logeado' && isset($_SESSION['usuario'])){
                 ?><div id='publicar'><a href="php/gauchada/nueva.php?usid=<?php echo $varuser['id_usuario']; ?>" >Publicar</a></div><?php
             }
 

@@ -39,6 +39,6 @@
 			<div id="justificacion"><textarea class="textarea" MAXLENGTH="300" name='justificacion' placeholder="Justifique su calificacion*" required rows="12" cols="50"></textarea></div>
 			<div id="enviar"><input type="submit" name="Responder" value="Enviar"></div>
 		</form></div>
-        
+
 	</body>	
 </html>	

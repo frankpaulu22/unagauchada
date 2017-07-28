@@ -44,7 +44,7 @@
 	font-size: 45px;
 }
 
-    #nohay {
+#nohay {
 	position: relative;
 	font-size: 22px;
     text-decoration: none;
@@ -52,7 +52,7 @@
     width: 680;
 }
 
-    #tit {
+#tit {
 	position: relative;
 	top: 0;
 	font-size: 26px;
@@ -60,8 +60,48 @@
     width: 680;
 }
 
-    #calificacion {
+#calificacion {
 	position: absolute;
 	top: 110%;
 	font-size: 22px;
+}
+
+
+#menucito {
+	position: absolute;
+    background: grey;
+    display: flex;
+    bottom: 40px;
+    left: 33%;
+}
+
+#menucito a {
+    display: block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#menucito a:hover {
+	background: rgba(0,0,0,0.3)
+}
+
+#menucito ul li:hover ul{
+	display:block;
+	position: absolute;
+	z-index: 10;
+	right: 182px;
+}
+
+#menucito li {
+	list-style: none;
+}
+
+#crear {
+	position: absolute;
+    top: 280px;
+	left:90%;
+	background: yellow;
+	text-decoration: none;
+
 }

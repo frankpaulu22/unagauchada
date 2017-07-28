@@ -46,7 +46,7 @@
 
 	    <select name="categoria" id="categoria" value="" required>
 	        <?php
-	        	$consulcate = 'SELECT * FROM categorias';
+	        	$consulcate = "SELECT * FROM categorias WHERE Disponible= 'Si'";
 	        	$rescate = mysqli_query($conexion, $consulcate);
 	        ?>
 	        <option disabled selected hidden value="">Categoria*</option>
