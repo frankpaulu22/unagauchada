@@ -3,7 +3,7 @@
     	include('../conexion.php');
     	$usuario=$_POST['usuario'];
     	$clave=$_POST['clave'];
-        $consulta1 = "SELECT * FROM admins WHERE email='$usuario' AND clave='$clave'";
+        $consulta1 = "SELECT * FROM admins WHERE email='$usuario' AND clave='$clave' AND estado='0'";
         $registro1 = mysqli_query($conexion, $consulta1);
 
         if ($admin=mysqli_fetch_array($registro1)){
