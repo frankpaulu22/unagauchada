@@ -37,6 +37,13 @@
                     window.location.href='/index.php';
                 </script>
     <?php   }
+            else if($usr['baneado'] == 2) {
+    ?>
+                <script>
+                    alert('Usuario dado de baja');
+                    window.location.href='/index.php';
+                </script>
+    <?php   }
             else {
                 session_start();
                 $_SESSION['estado'] = 'logeado';

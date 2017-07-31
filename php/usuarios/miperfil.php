@@ -241,7 +241,7 @@
         </div>
     </div>
     
-    <div id='Modificar'><a href="/php/usuarios/modificar.php?usid=<?php echo $_SESSION['usuario']; ?>" style="text-decoration:none;" >Modificar perfil</a></div>
+    <div id='Modificar'><a href="/php/usuarios/modificar.php?usid=<?php echo $_SESSION['usuario']; ?>" style="text-decoration:none;" >Modificar perfil</a></br><a onclick="return confirm('Esta seguro que desea eliminar su cuenta?')" href="/php/usuarios/eliminar.php?usid=<?php echo $_SESSION['usuario']; ?>" style="text-decoration:none;" >Eliminar mi cuenta</a></div>
         </div>
     
 

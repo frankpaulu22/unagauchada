@@ -101,7 +101,19 @@
 	position: absolute;
     top: 280px;
 	left:90%;
-	background: yellow;
 	text-decoration: none;
+}
 
+#tabla1 {
+	position: absolute;
+	top: 50%;
+	left: 1%;
+	font-size: 40px;
+}
+
+#tabla2 {
+	position: absolute;
+	top: 50%;
+	left: 60%;
+	font-size: 40px;
 }
