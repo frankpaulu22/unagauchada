@@ -33,7 +33,6 @@
 ?>
 				<table border="1">
 				<tr>
-					<td><strong>ID</strong></td>
 					<td><strong>Categoria</strong></td>
 					<td><strong>Disponible</strong></td>
 					<td><strong></strong></td>
@@ -43,7 +42,6 @@
 	<?php   
 		    	while($categoria= mysqli_fetch_array($consulta)){
 		    		echo "<tr>";
-			    		echo "<td>".$categoria['id_categoria']."</td>";
 			    		$cateid= $categoria['id_categoria'];
 			    		echo "<td>".$categoria['categoria']."</td>";
 			    		echo "<td>".$categoria['Disponible']."</td>";
