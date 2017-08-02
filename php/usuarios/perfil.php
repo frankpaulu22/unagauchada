@@ -13,7 +13,6 @@
     <?php 
      if (isset($_SESSION['usuario'])){
          }
-    echo $_GET['usid'];
     $otrouser= $_GET['usid'];
     ?>
     
@@ -23,6 +22,19 @@
     $resultado = mysqli_query($conexion, $user);
     
     $usuario = mysqli_fetch_assoc($resultado);
+    
+    if ($usuario['baneado'] > 0){
+        if ($usuario['baneado'] == 1){
+            ?>
+            <div id='eliminado'><?php echo 'Este usuario elimino su cuenta'?></div>
+        <?php
+        }
+        else{
+            ?>
+            <div id='baneado'><?php echo 'Este usuario ya no tiene permitido el acceso'?></div>
+        <?php
+        }
+    }
     
     $puntos= $usuario['puntos'];
     $ranks = "SELECT * FROM rangos  WHERE max >='$puntos' AND min <= '$puntos' ";
