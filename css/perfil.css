@@ -1,3 +1,21 @@
+#baneado {
+	position: relative;
+	top: 40%;
+    background: red;
+	left: 30%;
+	font-size: 30px;
+    width: 590px;
+}
+
+#eliminado {
+	position: relative;
+	top: 40%;
+    background: red;
+	left: 30%;
+	font-size: 30px;
+    width: 410px;
+}
+
 #perfil {
 	position: absolute;
 	top: 50%;
