@@ -1,0 +1,20 @@
+#tabla1 {
+	position: relative;
+	top: 60%;
+	left: 30%;
+	font-size: 45px;
+}
+
+#tabla2 {
+	position: relative;
+	top: 50%;
+	left: 30%;
+	font-size: 45px;
+}
+
+#crear {
+	position: relative;
+	top: 52%;
+	left: 65%;
+	font-size: 22px;
+}
