@@ -28,7 +28,7 @@
 		<input type='hidden' name='id'  value='<?php echo $cateid ?>' >
 		<input type='text' name='nombre' MAXLENGTH="20" value="<?php echo $categoria['categoria'] ?>" required>
 	    <input type='submit' value='Modificar'>
-	    <input type='reset' value='Cancelar'>
+	    <input onClick="window.location.href='/php/admins/categorias.php'" type='reset' value='Cancelar'>
 	</form>
 
 </body>

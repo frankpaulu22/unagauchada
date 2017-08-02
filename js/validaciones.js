@@ -56,8 +56,8 @@ function puntuacion() {
     puninicial = document.getElementById('puninicial');
     punfinal = document.getElementById('punfinal');
 
-    if(puninicial.value > punfinal.value){
-        alert('La puntuacion final no puede ser menor a la inicial');
+    if(parseInt(puninicial.value) > parseInt(punfinal.value)){
+        alert('La puntuacion final no puede ser menor a la inicial'+puninicial.value+punfinal.value);
         return false;
     }
     else{

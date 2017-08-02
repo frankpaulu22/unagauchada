@@ -44,7 +44,7 @@
 		}
 ?>
 	    <input type='submit' value='Consultar'>
-	    <input type='reset' value='Cancelar'>
+	    <input onClick="window.location.href='/index.php'" type='reset' value='Cancelar'>
 	</form>
 
 </body>

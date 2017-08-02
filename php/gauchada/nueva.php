@@ -64,7 +64,7 @@
 
 	    <select name="ciudad" id="ciudad" value="" required>
 	        <?php
-	        	$consulciu = 'SELECT * FROM ciudades INNER JOIN provincias ON provincias.id_provincia = ciudades.idprovincia';
+	        	$consulciu = 'SELECT * FROM ciudades';
 	        	$resciu = mysqli_query($conexion, $consulciu);
 	        ?>
 	        <option disabled selected hidden value="">Ciudad*</option>
@@ -72,10 +72,7 @@
 	        while ($arrciu = mysqli_fetch_array($resciu)){
 	        ?>
 	        <option value=" <?php echo $arrciu['id_ciudad'] ?> " >
-	        <?php
-            echo $arrciu['provincia'];
-            echo " - ";
-            echo $arrciu['ciudad']; ?>
+	        <?php echo $arrciu['ciudad']; ?>
 	        </option>
 
 	        <?php

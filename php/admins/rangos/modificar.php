@@ -1,6 +1,7 @@
 <head>
   <meta charset="utf-8">
   <title>Modificar</title>
+  <script src="/js/validaciones.js"></script>
 </head>
 <body>
 <?php 
@@ -23,7 +24,7 @@
 ?>
 
 
-	<form action='/php/admins/rangos/enviarmodificacion.php' method='POST' class="publicar">
+	<form action='/php/admins/rangos/enviarmodificacion.php' method='POST' onsubmit="return puntuacion();" class="publicar">
 		<h1>Complete los datos del rango</h1>
 		<h5>Los campos con un * son obligatorios</h5>
 		<input type='hidden' name='id'  value='<?php echo $rangoid ?>' >
@@ -31,7 +32,7 @@
 		<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="puninicial" name='puninicial' maxlength="5" value="<?php echo $rango['min']; ?>" required>
 		<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="punfinal" name='punfinal' maxlength="5" value="<?php echo $rango['max']; ?>" required>
 	    <input type='submit' value='Modificar'>
-	    <input type='reset' value='Cancelar'>
+	    <input onClick="window.location.href='/php/admins/rangos.php'"  type='reset' value='Cancelar'>
 	</form>
 
 

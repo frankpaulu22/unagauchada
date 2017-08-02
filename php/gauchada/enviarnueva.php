@@ -68,8 +68,12 @@
 			$ruta= "logo.png";
 			$imagen = addslashes(file_get_contents($ruta));
 			$extension1 = "image/png";
-			$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto1, extension1) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension1')";
-		    $resultado = mysqli_query($conexion, $insertar);
+			$imagen2= "";
+			$imagen3= "";
+			$extension2 = "";
+			$extension3 = "";
+			$insertar = "INSERT INTO gauchadas(idusuario, idcategoria, idciudad, titulo, descripcion, expiracion, foto1, extension1, foto2, extension2, foto3, extension3) VALUES ('$usrid', '$categoria', '$ciudad', '$titulo', '$descripcion', '$expiracion', '$imagen', '$extension1', '$imagen2', '$extension2', '$imagen3', '$extension3')";
+		    $resultado = mysqli_query($conexion, $insertar) or die ('Problemas en la consulta'. mysqli_error($conexion));
 
 			$update = "UPDATE usuarios SET creditos=creditos - '$restar' WHERE id_usuario=$usrid";
 		    $updcreditos = mysqli_query($conexion, $update) or die ('Problemas en la consulta'. mysql_error());

@@ -60,7 +60,7 @@
                 <form action='/index.php' method='POST' enctype="multipart/form-data">
                     <select name="categoria" id="categoria" value="" onchange="this.form.submit()">
                         <?php
-                            $consulcate = 'SELECT * FROM categorias';
+                            $consulcate = "SELECT * FROM categorias WHERE Disponible= 'Si'";
                             $rescate = mysqli_query($conexion, $consulcate);
                             if(isset($_POST['categoria'])) {
                                 $valorcate = "SELECT * FROM categorias WHERE id_categoria= '$filcat'";

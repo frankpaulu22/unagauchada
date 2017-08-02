@@ -13,9 +13,8 @@
 
 ?>   
 	    <script>
-	    	var gauid= <?php echo $gaid ?>;
 	        alert('Se ha despostulado con exito');
-	        window.location.href='/php/gauchada/detalle.php?ga='+gauid'&preg=';
+	        window.location.href='/php/gauchada/detalle.php?ga=<?php echo $gaid; ?>&preg=';
 	    </script>      
 <?php
 	}

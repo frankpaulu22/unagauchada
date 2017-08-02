@@ -5,6 +5,11 @@
 	$select= "SELECT * FROM rangos ORDER BY min";
 	$consulta= mysqli_query($conexion, $select);
 
+	$select1= "SELECT * FROM rangos ORDER BY min";
+	$consulta1= mysqli_query($conexion, $select1);
+
+	$primero= mysqli_fetch_assoc($consulta1);
+
 	$rango= mysqli_fetch_array($consulta);
 
 	while($rango['id_rango'] <> $rangoid){
@@ -14,7 +19,7 @@
 		$deletear= $rango['id_rango'];
 	}
 
-		if($rango['id_rango'] == $rangoid && $rango['min'] == 0){
+		if($rango['id_rango'] == $rangoid && $rango['id_rango'] == $primero['id_rango']){
 			$borrarid= $rango['id_rango'];
 			$borrarmin= $rango['min'];
 			$rango= mysqli_fetch_array($consulta);
