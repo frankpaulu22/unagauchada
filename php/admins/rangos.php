@@ -28,7 +28,6 @@
 
 			<table border="1">
 			<tr>
-				<td><strong>ID</strong></td>
 				<td><strong>Rango</strong></td>
 				<td><strong>Desde</strong></td>
 				<td><strong>Hasta</strong></td>
@@ -39,7 +38,6 @@
 <?php   
 	    	while($rango= mysqli_fetch_array($consulta)){
 	    		echo "<tr>";
-		    		echo "<td>".$rango['id_rango']."</td>";
 		    		$rangoid= $rango['id_rango'];
 		    		echo "<td>".$rango['nombre']."</td>";
 		    		echo "<td>".$rango['min']."</td>";
