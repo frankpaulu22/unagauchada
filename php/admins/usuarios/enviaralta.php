@@ -18,7 +18,7 @@
     	?>   
 	    <script>
 	        alert('La direccion de email ya esta registrada');
-	        window.location.href='/php/admins/registro.php';
+	        window.location.href='/php/admins/usuarios/altaadmin.php';
 	    </script>  
 	    <?php
     }

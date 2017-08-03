@@ -22,7 +22,7 @@
 		<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="puninicial" name='puninicial' maxlength="5" placeholder='Puntaje inicial*' required>
 		<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="punfinal" name='punfinal' maxlength="5" placeholder='Puntaje final*' required>
 	    <input type='submit' value='Crear'>
-	    <input type='reset' value='Cancelar'>
+	    <input type='reset' onClick="window.location.href='/php/admins/rangos.php'" value='Cancelar'>
 	</form>
 
 

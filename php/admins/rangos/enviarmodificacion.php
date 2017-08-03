@@ -23,7 +23,7 @@
 			}
 			else{
 
-				$select= "SELECT * FROM rangos ORDER BY min";
+				$select= "SELECT * FROM rangos WHERE id_rango<>'$rangoid' ORDER BY min";
 				$consulta= mysqli_query($conexion, $select);
 
 				$rango= mysqli_fetch_array($consulta);

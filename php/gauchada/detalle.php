@@ -25,7 +25,7 @@
     $consulta = "SELECT * FROM gauchadas G INNER JOIN categorias C ON G.idcategoria=C.id_categoria INNER JOIN usuarios U ON G.idusuario=U.id_usuario INNER JOIN ciudades Ci ON G.idciudad=Ci.id_ciudad WHERE id_gauchada='$gaid'";
     $resultado = mysqli_query($conexion, $consulta);
     $gauchada= mysqli_fetch_assoc($resultado);
-    $consulta2 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario";
+    $consulta2 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario=U.id_usuario AND U.baneado= 0";
     $resultado2= mysqli_query($conexion, $consulta2);
     
     $consulta4 = "SELECT * FROM calificaciones WHERE idgauchada=$gaid";
@@ -162,7 +162,7 @@
                     if ($pregun['respuesta']== ""){
                     ?>  
 
-                    <form action="/php/gauchada/eliminarpregunta.php" method="POST" class="repregunta" >
+                    <form action="/php/gauchada/eliminarpregunta.php" method="POST" onsubmit="return confirm(' Esta seguro que desea eliminar esta pregunta?')" class="repregunta" >
                         <input type="hidden" name="coment" value="<?php echo $pregun['id_comentario']; ?>">
                         <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
                         <input type="submit" name="eliminar" value="Eliminar">
@@ -182,7 +182,7 @@
                 else if(isset($_SESSION['admin'])){
                 ?>  
 
-                    <form action="/php/gauchada/eliminarpregunta.php" method="POST" class="repregunta" >
+                    <form action="/php/gauchada/eliminarpregunta.php" method="POST" onsubmit="return confirm(' Esta seguro que desea eliminar esta pregunta?')" class="repregunta" >
                         <input type="hidden" name="coment" value="<?php echo $pregun['id_comentario']; ?>">
                         <input type="hidden" name="gaid" value="<?php echo $gaid; ?>">
                         <input type="submit" name="eliminar" value="Eliminar">

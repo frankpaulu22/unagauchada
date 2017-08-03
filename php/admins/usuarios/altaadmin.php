@@ -16,7 +16,7 @@
     <input type='text' maxlength="20" id="apellido" name='apellido' placeholder='Apellido*' required>
     <input type='email' maxlength="40" id="email" name='email' placeholder='Email*' required>
     <input type='password' maxlength="20" id="clave" name='clave' placeholder='Contraseña*' required>
-    <input type='submit' value='Registrarse'>
+    <input type='submit' value='Dar de alta'>
     <input type='reset' value='Cancelar'>
 </form>
 

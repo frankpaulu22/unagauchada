@@ -10,7 +10,7 @@
 	$usid= $_GET['usid'];
 	$caducidad= date("Y-m-d");
 
-	$consulta = "SELECT * FROM gauchadas g INNER JOIN categorias c INNER JOIN ciudades ci WHERE g.id_gauchada='$gauid' AND g.idcategoria=c.id_categoria AND g.idciudad=ci.id_ciudad";
+	$consulta = "SELECT * FROM gauchadas g INNER JOIN categorias c INNER JOIN ciudades ci INNER JOIN provincias p WHERE g.id_gauchada='$gauid' AND g.idcategoria=c.id_categoria AND g.idciudad=ci.id_ciudad AND ci.idprovincia=p.id_provincia";
     $resultado = mysqli_query($conexion, $consulta);
     $gauchada= mysqli_fetch_array($resultado);
 
@@ -59,15 +59,15 @@
 
 		    <select name="ciudad" id="ciudad" value="" required>
 		        <?php
-		        	$consulciu = 'SELECT * FROM ciudades';
+		        	$consulciu = 'SELECT * FROM ciudades c INNER JOIN provincias p WHERE c.idprovincia=p.id_provincia ORDER BY p.provincia';
 		        	$resciu = mysqli_query($conexion, $consulciu);
 		        ?>
-		        <option selected hidden value="<?php echo $gauchada['idciudad']; ?>"><?php echo $gauchada['ciudad']; ?></option>
+		        <option selected hidden value="<?php echo $gauchada['idciudad']; ?>"><?php echo $gauchada['provincia'].'-'.$gauchada['ciudad']; ?></option>
 		        <?php    
 		        while ($arrciu = mysqli_fetch_array($resciu)){
 		        ?>
 		        <option value=" <?php echo $arrciu['id_ciudad'] ?> " >
-		        <?php echo $arrciu['ciudad']; ?>
+		        <?php echo $arrciu['provincia']."-".$arrciu['ciudad']; ?>
 		        </option>
 
 		        <?php

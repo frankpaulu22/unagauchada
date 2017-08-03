@@ -44,8 +44,19 @@
  		    	    $insertar = "UPDATE gauchadas SET idcategoria='$categoria', idciudad='$ciudad', titulo='$titulo', descripcion='$descripcion', expiracion='$expiracion' $img1 $img2 $img3 WHERE id_gauchada='$gauid'";
                 
                     $resultado = mysqli_query($conexion, $insertar);
-?>   
-	    <script>
+
+                    $select= "SELECT * FROM postulantes p INNER JOIN usuarios u WHERE p.idgauchada='$gauid' and u.id_usuario=p.idusuario";
+                    $consulta= mysqli_query($conexion, $select);
+                    $existe= mysqli_fetch_array($consulta);
+                    if(!empty($existe)){
+?>
+                        <script>
+                            alert("Se le notificara a los usuarios: <?php while($postu=mysqli_fetch_array($consulta)){ echo $postu['nombre'].' '.$postu['apellido'].', ';} ?>sobre la modificacion de la gauchada");
+                        </script> 
+<?php
+                    }
+?> 
+        <script>
 	        alert('Se modifico la gauchada');
 	        window.location.href='/php/gauchada/detalle.php?ga=<?php echo $gauid; ?>&preg=';
 	    </script>      

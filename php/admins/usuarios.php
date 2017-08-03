@@ -56,12 +56,15 @@
 			    		echo "<td>".$admin['email']."</td>";
 			    		if($admin['estado'] == 1){
 			    			echo "<td>Eliminado</td>";
-			    			echo "<td>.....</td>";
+	?>
+							<td><a onclick="return confirm('Esta seguro que desea restituir a este admin?')" href="/php/admins/usuarios/restituir.php?id=<?php echo $admid ?>">Restituir</a></td>
+	<?php
+
 			    		}
 			    		else if($admin['estado'] == 0){
 			    			echo "<td>Activo</td>";
 	?>
-						<td><a onclick="return confirm('Esta seguro que desea eliminar a este admin?')" href="/php/admins/usuarios/bajaadmin.php?id=<?php echo $admid ?>">Eliminar</a></td>
+							<td><a onclick="return confirm('Esta seguro que desea eliminar a este admin?')" href="/php/admins/usuarios/bajaadmin.php?id=<?php echo $admid ?>">Eliminar</a></td>
 	<?php
 			    		}
 

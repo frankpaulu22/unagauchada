@@ -22,7 +22,7 @@
 		echo "</br>";
 
 
-	    $consulta3 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario <> '$posid' AND P.idusuario=U.id_usuario";
+	    $consulta3 = "SELECT * FROM postulantes P INNER JOIN usuarios U WHERE P.idgauchada='$gaid' AND P.idusuario <> '$posid' AND P.idusuario=U.id_usuario AND U.baneado= 0";
 	    $resultado3= mysqli_query($conexion, $consulta3);
 	    $rechazados= ' ';
 		while($postulantes2= mysqli_fetch_array($resultado3)) {

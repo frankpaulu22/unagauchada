@@ -38,9 +38,22 @@
 		<input type="date" name="fecha2" max="2080-06-08" id="fecha2" value="<?php echo $fecha2; ?>" required>
 <?php
 		if(isset($_POST['fecha1'])){
+            $creds= $total/50;
 ?>
-			<label>Total entre fechas: </label><input type='text' value="<?php echo '$'.$total ?>" name='total'>
+            <label>Creditos entre fechas: </label><input type='text' disabled="disabled" value="<?php if($total == 0){
+                echo "No hay ventas registradas";
+                }
+                else{
+                    echo $creds;
+                }
+                ?>" name='creds'>
 <?php
+            if($total<>0){
+                ?>
+                <label>Monto correspondiente: </label><input type='text' disabled="disabled" value="<?php echo '$'.$total; ?>" name='total'>
+                <?php
+            }
+
 		}
 ?>
 	    <input type='submit' value='Consultar'>

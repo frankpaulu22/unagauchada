@@ -23,6 +23,8 @@
     $user = "SELECT * FROM usuarios  WHERE id_usuario='$_SESSION[usuario]'";
     $comentarios = "SELECT * FROM comentarios  WHERE idusuario='$_SESSION[usuario]'";
     $postulaciones = "SELECT * FROM postulantes  WHERE idusuario='$_SESSION[usuario]'";
+
+    $expiro= date("Y-m-d");
     
     $resultado = mysqli_query($conexion, $user);
     $resultado1 = mysqli_query($conexion, $gauchadas);
@@ -213,9 +215,13 @@
                 if($gauch1['idpostulante'] == 0){
                 ?>
                     <div id='pos'><a href="/php/gauchada/detalle.php?ga=<?php echo $postulacion['idgauchada']; ?>&preg=" style="text-decoration:none;"><?php echo $gauch1['titulo'];?></a>
-
-                    <div id='estadoP'>Pendiente</div></div>
                 <?php
+                    if($gauch1['expiracion'] > $expiro){
+                        echo "<div id='estadoP'>Pendiente</div></div>";
+                    }
+                    else{
+                        echo "<div id='estadoV'>Vencida</div></div>";
+                    }
                 }
                 else{
                     if($gauch1['idpostulante'] == $_SESSION['usuario']){

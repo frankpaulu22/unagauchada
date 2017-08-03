@@ -3,19 +3,31 @@
     	include('../conexion.php');
     	$usuario=$_POST['usuario'];
     	$clave=$_POST['clave'];
-        $consulta1 = "SELECT * FROM admins WHERE email='$usuario' AND clave='$clave' AND estado='0'";
+        $consulta1 = "SELECT * FROM admins WHERE email='$usuario' AND clave='$clave'";
         $registro1 = mysqli_query($conexion, $consulta1);
+        $admin=mysqli_fetch_array($registro1);
 
-        if ($admin=mysqli_fetch_array($registro1)){
-            session_start();
-            $_SESSION['estado'] = 'logeado';
-            $_SESSION['admin'] = $admin['id_admin'];
-        ?>
-            <script>
-                alert('Admin logeado');
-                window.location.href='/index.php';
-            </script>
-        <?php
+
+        if (!empty($admin)){
+            if($admin['estado']==1){
+?>
+                <script>
+                    alert('Administrador dado de baja');
+                    window.location.href='/php/usuarios/iniciar.php';
+                </script>
+<?php            
+            }
+            else{
+                session_start();
+                $_SESSION['estado'] = 'logeado';
+                $_SESSION['admin'] = $admin['id_admin'];
+?>
+                <script>
+                    alert('Admin logeado');
+                    window.location.href='/index.php';
+                </script>
+<?php
+            }
         }
         else{
 

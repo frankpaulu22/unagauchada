@@ -45,10 +45,18 @@
 			    		$cateid= $categoria['id_categoria'];
 			    		echo "<td>".$categoria['categoria']."</td>";
 			    		echo "<td>".$categoria['Disponible']."</td>";
+			    		if($categoria['Disponible']=='No'){
 	?>
-						<td><a href="/php/admins/categorias/modificar.php?id=<?php echo $cateid ?>">Modificar</a></td>
-						<td><a onclick="return confirm('Esta seguro que desea eliminar esta categoria?')" href="/php/admins/categorias/eliminar.php?id=<?php echo $cateid ?>">Eliminar</a></td>
+							<td>.....</td>
+							<td><a onclick="return confirm('Esta seguro que desea restaurar esta categoria?')" href="/php/admins/categorias/restaurar.php?id=<?php echo $cateid ?>">Restaurar</a></td>
+	<?php			    			
+			    		}
+			    		else{
+	?>
+							<td><a href="/php/admins/categorias/modificar.php?id=<?php echo $cateid ?>">Modificar</a></td>
+							<td><a onclick="return confirm('Esta seguro que desea eliminar esta categoria?')" href="/php/admins/categorias/eliminar.php?id=<?php echo $cateid ?>">Eliminar</a></td>
 	<?php
+						}
 
 		    		echo "</tr>";
 		    	}
