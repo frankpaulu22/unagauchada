@@ -16,7 +16,7 @@
 ?>
 
 	<form action='/php/admins/rangos/enviarrango.php' method='POST' onsubmit="return puntuacion();" class="publicar">
-		<h1>Complete los datos del rango</h1>
+		<h1>Complete los datos de la reputacion</h1>
 		<h5>Los campos con un * son obligatorios</h5>
 		<input type='text' name='nombre' MAXLENGTH="20" placeholder='Nombre*' required>
 		<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="puninicial" name='puninicial' maxlength="5" placeholder='Puntaje inicial*' required>

@@ -54,7 +54,7 @@
 
 		?>
 				<script>
-					alert('Rango modificado exitosamente');
+					alert('Reputacion modificada exitosamente');
 					window.location.href='/php/admins/rangos.php';
 				</script>
 		<?php

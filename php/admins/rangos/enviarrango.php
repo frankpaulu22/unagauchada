@@ -14,7 +14,7 @@
 			if(!empty($existe)){
 ?>
 				<script>
-					alert('El nombre del rango ya existe');
+					alert('El nombre de la reputacion ya existe');
 					window.location.href='/php/admins/rangos/crear.php';
 				</script>
 <?php
@@ -52,7 +52,7 @@
 
 		?>
 				<script>
-					alert('Rango creado exitosamente');
+					alert('Reputacion creada exitosamente');
 					window.location.href='/php/admins/rangos.php';
 				</script>
 		<?php

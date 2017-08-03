@@ -25,7 +25,7 @@
 
 
 	<form action='/php/admins/rangos/enviarmodificacion.php' method='POST' onsubmit="return puntuacion();" class="publicar">
-		<h1>Complete los datos del rango</h1>
+		<h1>Complete los datos de la reputacion</h1>
 		<h5>Los campos con un * son obligatorios</h5>
 		<input type='hidden' name='id'  value='<?php echo $rangoid ?>' >
 		<input type='text' name='nombre' MAXLENGTH="20" value="<?php echo $rango['nombre']; ?>" required>
