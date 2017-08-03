@@ -32,7 +32,7 @@
       </div>
 
       <div id="menucito">
-        <li><a href="/php/admins/rangos.php">Rangos</a></li>
+        <li><a href="/php/admins/rangos.php">Reputaciones</a></li>
         <li><a href="/php/admins/categorias.php">Categorias</a></li>
         <li><a href="/php/admins/usuarios.php">Usuarios</a></li>
       </div>

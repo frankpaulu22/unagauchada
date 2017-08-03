@@ -23,18 +23,18 @@
     	$consulta= mysqli_query($conexion, $select);
     	$existe= mysqli_fetch_array($consulta);
 ?>
-		<div id='crear'><a href="/php/admins/rangos/crear.php">Crear rango</a></div>
+		<div id='crear'><a href="/php/admins/rangos/crear.php">Crear reputacion</a></div>
 
 		<div id='perfil'>
 <?php
 			if(empty($existe)){
-				echo "<h4>No hay rangos disponibles aun</h4>";
+				echo "<h4>No hay reputaciones disponibles aun</h4>";
 			}
 			else{
 ?>
 				<table border="1">
 				<tr>
-					<td><strong>Rango</strong></td>
+					<td><strong>Reputacion</strong></td>
 					<td><strong>Desde</strong></td>
 					<td><strong>Hasta</strong></td>
 					<td><strong></strong></td>
