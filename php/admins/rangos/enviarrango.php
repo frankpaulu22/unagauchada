@@ -19,6 +19,24 @@
 				</script>
 <?php
 			}
+			$ultimo= "SELECT * FROM rangos ORDER BY max DESC LIMIT 1";
+			$elegir= mysqli_query($conexion, $ultimo);
+			$last= mysqli_fetch_array($elegir);
+			$lastid= $last['id_rango'];
+			if($last['max'] < $puninicial){
+				$insertar2 = "UPDATE rangos SET max= '$puninicial' - '$numero' WHERE id_rango = '$lastid'";
+				$resultado2 = mysqli_query($conexion, $insertar2) or die ('Problemas en la consulta'. mysql_error());
+
+				$insertar3 = "INSERT INTO rangos(nombre, min, max) VALUES ('$nombre', '$puninicial', '$punfinal')";
+				$resultado3 = mysqli_query($conexion, $insertar3) or die ('Problemas en la consulta'. mysql_error());
+
+		?>
+				<script>
+					alert('Reputacion creada exitosamente');
+					window.location.href='/php/admins/rangos.php';
+				</script>
+		<?php
+			}
 			else{
 
 				$select= "SELECT * FROM rangos ORDER BY min";
