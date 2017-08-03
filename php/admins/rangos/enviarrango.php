@@ -23,7 +23,7 @@
 			$elegir= mysqli_query($conexion, $ultimo);
 			$last= mysqli_fetch_array($elegir);
 			$lastid= $last['id_rango'];
-			if($last['max'] < $puninicial){
+			if($last['max'] < $puninicial or $last['max']==$punfinal && $last['min'] < $puninicial){
 				$insertar2 = "UPDATE rangos SET max= '$puninicial' - '$numero' WHERE id_rango = '$lastid'";
 				$resultado2 = mysqli_query($conexion, $insertar2) or die ('Problemas en la consulta'. mysql_error());
 
